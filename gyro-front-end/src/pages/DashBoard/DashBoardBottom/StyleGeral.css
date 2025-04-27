@@ -1,0 +1,87 @@
+.dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    color: white;
+    padding: 1px; /* 30% menor que 20px */
+    border-radius: 7px; /* 30% menor que 10px */
+}
+
+.top-products {
+    font-size: 5px;
+    background-color: #131313;
+    padding: 14px; 
+    border-radius: 7px; 
+    width: 560px;
+    height: 225px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.div_lista_top_products {
+    padding: 3px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 266px;
+    height: 191px;
+    font-size: 25px;
+}
+.div_lista_top_products ul {
+    font-size: 20px;
+}
+.div_lista_top_products li {
+    font-size: 15px;
+}
+
+.revenue-average {
+    background-color: #131313;
+    padding: 14px; /* 30% menor que 20px */
+    border-radius: 7px; /* 30% menor que 10px */
+    width: 400px; /* 30% menor que 200px */
+}
+
+.top-products h3, .revenue-average h3 {
+    font-size: 0.84em; /* 30% menor que 1.2em */
+    margin-bottom: 7px; /* 30% menor que 10px */
+}
+
+.top-products ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.top-products li {
+    margin-bottom: 3.5px; /* 30% menor que 5px */
+}
+
+.revenue-average .revenue-values {
+    display: flex;
+    justify-content: space-between;
+}
+
+.revenue-average .revenue-item {
+    text-align: center;
+}
+
+.revenue-average .revenue-item p {
+    margin: 0;
+}
+
+.pie-chart {
+    width: 220px;
+    height: 220px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 35%; /* Mantém a proporção */
+}
+
+.chart-circle {
+    width: 70%; /* 30% menor que 80% */
+    height: 70%; /* 30% menor que 80% */
+    border-radius: 50%;
+    background: conic-gradient(#ffc107 0% 40%, #ff9800 40% 70%, #ff5722 70% 100%);
+}

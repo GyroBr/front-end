@@ -1,0 +1,73 @@
+
+.bouth_dash{
+    width: 100%;
+    display: flex;
+}
+/* Estilos principais do container do gráfico */
+.barChartContainer {
+    width: 200%;
+    display: flex;
+    align-items: flex-start;
+    padding: 20px;
+    max-width: 800px;
+    margin: 5px;
+    background-color:#131313; /* Fundo escuro */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Eixo Y com as labels */
+.yAxisLabels {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-right: 10px;
+    height: 200px;
+    color: #ffffff; /* Cor das labels no eixo Y */
+}
+
+.yAxisLabels span {
+    font-size: 14px;
+    color: #ffffff; /* Cor das labels no eixo Y */
+}
+
+/* Área do gráfico */
+.barChart {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    width: 100%;
+    height: 200px;
+    border-left: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    position: relative;
+}
+
+/* Container de cada barra */
+.barContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40px;
+}
+
+/* Estilos das barras */
+.bar {
+    width: 100%;
+    background-color: #f0a500; /* Cor laranja das barras */
+    transition: background-color 0.3s ease;
+    border-radius: 4px 4px 0 0;
+}
+
+/* Texto do dia */
+.barContainer p {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #ffffff; /* Cor das labels dos dias */
+}
+
+/* Estilo de hover para a barra */
+.bar:hover {
+    background-color: #ffbe55; /* Tom laranja mais claro no hover */
+}

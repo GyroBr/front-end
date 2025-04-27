@@ -1,0 +1,50 @@
+
+
+.dashboard {
+  display: flex;
+  padding: 10px;
+}
+
+/* Estilos dos cards */
+.card {
+  background-color: #131313;
+  padding: 10px;
+  height: 130px;
+  width: 250px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* overflow: hidden;
+  text-overflow: ellipsis; 
+  white-space: nowrap;  */
+}
+
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.card-icon {
+  font-size: 20px;
+}
+
+.card-percentage {
+  color: #32CD32;
+  font-size: 20px;
+}
+
+.card-value {
+  font-size: 16px;
+  font-weight: 600;
+  padding-left: 20px;
+}
+
+.card-label {
+  font-size: 13px;
+  color: #A9A9A9;
+  padding-left: 20px;
+}

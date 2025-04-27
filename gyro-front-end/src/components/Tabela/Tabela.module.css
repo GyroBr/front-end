@@ -1,0 +1,41 @@
+.tableContainer {
+    max-height: 320px;
+    overflow-y: auto;
+  }
+
+  .tableContainer::-webkit-scrollbar {
+    width: 8px; /* Largura do scrollbar */
+  }
+  
+  .tableContainer::-webkit-scrollbar-thumb {
+    background-color: #FFA34E; /* Cor do thumb do scrollbar */
+    border-radius: 10px; /* Bordas arredondadas */
+  }
+  
+  .tableContainer::-webkit-scrollbar-track {
+    background: transparent; /* Fundo transparente */
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+  }
+  
+  .table th, .table td {
+    /* border: 1px solid #dddddd2b; */
+    padding: 8px;
+    height: 10px;
+  }
+  
+  .table th {
+    text-align: left;
+    height: 50px;
+  }
+
+  .table .descricao {
+    max-width: 200px; /* Defina a largura máxima desejada */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }

@@ -1,0 +1,125 @@
+.tituloPag{
+   
+    font-weight: bold;
+    /* margin-bottom: 1rem; */
+    /* color: white; */
+    border-bottom: 2px solid white;
+    width: 100%;
+}
+
+.tituloPag h1{
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 7px  ;
+    margin-top: 7px;
+    color: white;
+    margin-left: 2rem;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    /* justify-content: center; */
+    width: 100%;
+    /* margin-top: 2rem; */
+}
+
+.blocoSuperior{
+    /* background-color: aliceblue; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* justify-content: space-around; */
+}
+
+.fotoPerfil{
+    width: 180px;
+    height: 180px;
+    /* display: flex; */
+    justify-content: center;
+    flex-direction: column;
+    /* align-items: center; */
+}
+
+.botaoEditarImagem{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* width: 100%; */
+    /* margin-top: 1rem; */
+}
+
+.DadosPerfil{
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* width: 100%; */
+    margin-top: 2rem;
+    width: 700px;
+    margin-left: 70px;
+}
+
+.inputsBloco{
+        justify-content: space-around;
+        width: 46%;
+        /* padding: 50px; */
+}
+.inputs{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.inputs p{
+    color: white;
+    font-size: 15px;
+    font-weight: normal;
+    /* margin-top: 1rem; */
+}
+
+.botaoEditarImagem button{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 18vh;
+    height: 2rem;
+    text-align: center;
+    color: aliceblue;
+    text-decoration: none;
+    border-radius: 7px;
+    border: 2px solid #0004ea;
+    /* font-weight: semibold; */
+    font-size: 14px;
+    margin-top: 10px;
+    background-color: transparent;
+}
+
+.botao{
+    img{
+        width: 20px;
+        height: 20px;
+    };
+
+    padding-right: 2%;
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+.botaoPerfil{
+    cursor: pointer;
+}
+
+.botaoPerfil:hover{
+    background-color: #EA7100;
+    color: white;
+}
+
+.divisoria{
+    width: 100%;
+    border-bottom: 1px solid white;
+    margin-top: 1rem;
+}

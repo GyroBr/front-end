@@ -1,0 +1,40 @@
+.routeButton{
+    display: flex;
+    /* background-color: black; */
+    gap: 10px;
+    position: relative;
+    padding-bottom: 5px;
+    align-items: center;
+    
+}
+
+.routeButton:hover{
+
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+p{
+    font-size: 1rem;
+    color: white;
+    font-weight: 500;
+}
+
+.routeButton::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #EA7100;
+    transition: width 0.3s ease;
+}
+
+.routeButton:hover::after {
+    width: 100%;
+}
+
+/* .icon{
+    
+} */

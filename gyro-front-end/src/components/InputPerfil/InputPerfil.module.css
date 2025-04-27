@@ -1,0 +1,19 @@
+.inputPerfil{
+    width: 100%;
+    padding: 8px;
+    /* margin: 20   px 0; */
+    border: 1px solid #EA7100;
+    border-radius: 7px;
+    box-sizing: border-box;
+    background-color: #282C3B;
+    margin: 3px 0 20px 0;
+    outline: none;
+    color: white;
+}
+
+
+.habilitado{
+    background-color: white;
+    color: black;
+    font-weight: 500;
+}

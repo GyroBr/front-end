@@ -1,0 +1,598 @@
+.home {
+  width: 100vw;
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+.banner1,
+.banner2,
+.banner3,
+.banner4,
+.banner5,
+.banner6,
+.banner7,
+.banner8,
+footer {
+  height: 100vh;
+  scroll-snap-align: start;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Começo banner 1 */
+.banner1 {
+  height: 100vh;
+  width: 100%;
+  background-image: url('../../assets/images/banner1.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.banner_shadow {
+  height: 100vh;
+  width: 100%;
+  background-color: #0000007a;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.banner1 .banner_content {
+  height: 45vh;
+  width: 45vw;
+  margin-left: 15vh;
+  color: #ffffff;
+}
+
+.banner_content h1 {
+  font-size: 2.5rem;
+  font-weight: 400;
+}
+
+.point {
+  color: #EA7100;
+}
+
+.banner_content p {
+  display: flex;
+  flex-direction: row;
+  font-size: 1.5rem;
+}
+
+.banner_content span {
+  font-size: 2.5rem;
+  width: 360px;
+}
+
+.banner1 button {
+  width: 30vh;
+  height: 2.5rem;
+  text-align: center;
+  color: aliceblue;
+  text-decoration: none;
+  border-radius: 5px;
+  border: 2px solid #EA7100;
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 40px;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all linear 0.25s;
+}
+.banner1 button:hover {
+  scale: 1.05;
+  color: #EA7100;
+  border: 2px solid aliceblue;
+  background-color: aliceblue;}
+
+
+/* Começo banner 2 */
+.banner2 {
+  height: 100vh;
+  width: 100%;
+  background-image: url('../../assets/images/banner2.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  display: flex;
+  justify-content: right;
+}
+
+.banner2 button {
+  width: 30vh;
+  height: 2.5rem;
+  text-align: center;
+  border: 1px #ffffff;
+  color: #EA7100;
+  text-decoration: none;
+  border-radius: 5px;
+  border: 2px solid #ffffff;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all linear 0.25s;
+}
+.banner2 button:hover {
+  scale: 1.05;
+  border: 1px #ffffff;
+  color: #EA7100;
+  border: 2px solid #ffffff;
+}
+
+.banner2 .banner_content {
+  height: 35vh;
+  width: 43vw;
+  margin-right: 10vh;
+  color: #ffffff;
+}
+
+.banner2 .point {
+  color: rgb(6, 6, 79);
+}
+
+/* Começo banner 3 */
+.banner3 {
+  height: 100vh;
+  width: 100%;
+  background-image: url('../../assets/images/banner3.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.banner3 button {
+  width: 30vh;
+  height: 2.5rem;
+  text-align: center;
+  color: #EA7100;
+  text-decoration: none;
+  border-radius: 5px;
+  border: 2px solid #ffffff;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all linear 0.25s;
+}
+.banner3 button:hover {
+  scale: 1.05;
+  color: #ffffff;
+  background-color: #EA7100;
+  border: 2px solid #EA7100;
+}
+
+.banner3 .banner_content {
+  height: 45vh;
+  width: 55vw;
+  margin-left: 15vh;
+  color: #ffffff;
+}
+
+.banner3 .banner_content p {
+  width: 70vh;
+}
+
+/* banner 4 */
+.banner4 {
+  background-color: #ffffff;
+}
+
+.banner4 p {
+  color: #000000;
+}
+
+.banner4 .banner_content {
+  display: flex;
+  flex-direction: row;
+  width: 80vw;
+  height: 70vh;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.img360 {
+  background-image: url('../../assets/images/360img.png');
+  width: 33%;
+  height: 84%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.banner4 .banner_content_text {
+  width: 38vw;
+  height: 40vh;
+}
+
+.banner4 button {
+  width: 30vh;
+  height: 2.5rem;
+  text-align: center;
+  background-color: transparent;
+  color: black;
+  text-decoration: none;
+  border-radius: 5px;
+  border: 2px solid #EA7100;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all linear 0.25s;
+}
+.banner4 button:hover {
+  scale: 1.05;
+  color: #ffffff;
+  background-color: #EA7100;
+  border: 2px solid #EA7100;
+}
+
+
+/* banner 5 */
+.banner5 {
+  height: 100vh;
+  width: 100%;
+  background-image: url('../../assets/images/banner5.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.banner5 .banner_content {
+  height: 45vh;
+  width: 55vw;
+  margin-left: 15vh;
+  color: #ffffff;
+}
+
+.banner5 button {
+  width: 30vh;
+  height: 2.5rem;
+  text-align: center;
+  color: #ffffff;
+  background-color: transparent;
+  text-decoration: none;
+  border-radius: 5px;
+  border: 2px solid #EA7100;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all linear 0.25s;
+}
+.banner5 button:hover {
+  scale: 1.05;
+  border: 1px #ffffff;
+  color: #EA7100;
+  background-color: #ffffff;
+  border: 2px solid #ffffff;
+}
+
+/* banner 6 */
+.banner6 {
+  height: 100vh;
+  width: 100%;
+  background-image: url('../../assets/images/banner6.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: rgb(255, 255, 255);
+  display: flex;
+  justify-content: right;
+}
+
+.banner6 .banner_content {
+  height: 35vh;
+  width: 50vw;
+  margin-right: 10vh;
+  color: #ffffff;
+}
+
+.banner6 button {
+  width: 30vh;
+  height: 2.5rem;
+  text-align: center;
+  border: 1px #ffffff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  border: 2px solid #ffffff;
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 40px;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all linear 0.25s;
+}
+.banner6 button:hover {
+  scale: 1.05;
+  border: 1px #ffffff;
+  color: #EA7100;
+  background-color: #ffffff;
+  border: 2px solid #ffffff;
+}
+
+/* Começo banner 7 */
+.banner7 {
+  height: 100vh;
+  width: 100%;
+  background-color: #ffffff;
+}
+
+.banner7 .banner_content {
+  width: 80vw;
+  height: 80vh;
+  margin-top: 10vh;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.div_Title {
+  width: 100%;
+  height: 25vh;
+  text-align: center;
+  align-items: center;
+}
+.div_Title p{
+  margin: 0;
+}
+
+.div_SubText {
+  width: 100%;
+  height: 55vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.banner7 .card {
+  height: 95%;
+  width: 45vh;
+  background-color: #fefefe;
+  border-radius: 5px;
+  border: solid 1px rgb(49, 49, 49);
+  padding: 3vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.banner7 .card h1 {
+  font-size: 25px;
+  color: #000000;
+}
+
+.banner7 .banner_content p {
+  font-size: 18px;
+  color: #494949;
+}
+
+.banner7 .banner_content .div_SubText p {
+  font-size: 12px;
+  color: #494949;
+}
+
+.card .icons {
+  width: 2vw;
+}
+
+/* Começando banner8 */
+.banner8 {
+  background-color: #142745;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.banner8 .banner_content_text {
+  width: 96vh;
+  height: 35vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  color: #ffffff;
+  padding: 0 0 0 5vh;
+}
+
+.banner8 .card_email {
+  background-color: #ffffff;
+  height: 35vh;
+  width: 25vw;
+  border-radius: 7px;
+  margin: 0 0 0 0%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: start;
+  padding: 0 1vh 0 2vh;
+}
+
+.card_email .banner_content .card {
+  height: 30%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card_email .banner_content .card2 {
+  height: 65%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card_email .banner_content .input_description {
+  height: 80%;
+  width: 100%;
+  border-radius: 3px;
+  border: 1px solid #202020;
+}
+
+.card_email .banner_content .input_message {
+  height: 78%;
+  width: 100%;
+  border-radius: 3px;
+  border: 1px solid #202020;
+}
+
+.card_email .banner_content {
+  width: 90%;
+  height: 65%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+}
+
+.card_email .bu {
+  background-color: #EA7100;
+  width: 5vw;
+  height: 4vh;
+  border: 1px solid #EA7100;
+  border-radius: 5px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all linear 0.25s;
+}
+.card_email .bu:hover {
+  scale: 1.05;
+  background-color: #EA7100;
+  border: 1px solid #EA7100;
+  color: #ffffff;
+}
+
+.card_email p {
+  font-size: 1rem;
+  color: #000000;
+}
+
+.banner8 .banner_content_text h1 {
+  font-size: 2.1rem;
+}
+
+.banner8 .banner_content_text p {
+  font-size: 1.1rem;
+}
+
+
+
+/* Começando footer */
+footer {
+  background-color: #202020;
+  height: 80vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+footer .banner_content {
+  height: 40vh;
+  width: 70vw;
+  border-top: 1px solid rgb(72, 72, 72);
+  border-bottom: 1px solid rgb(72, 72, 72);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+footer .banner_content_text {
+  padding: 2vh;
+  height: 5vh;
+  width: 70vw;
+  color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+footer .div1 {
+  width: 60%;
+}
+
+footer .div2 {
+  width: 30%;
+}
+
+footer .div1 ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-size: 0.8rem;
+  text-decoration: none;
+  list-style: none;
+}
+
+footer p {
+  font-size: 0.8rem;
+}
+
+.div_icon {
+  width: 25vw;
+  height: 30vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.div_icon .big_icon {
+  height: 45vh;
+}
+
+.div_contact {
+  width: 40vw;
+  height: 30vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.div_contact .card {
+  width: 35vw;
+  height: 18vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.div_contact p {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #ffffff;
+  margin: 0;
+}
+
+.div_contact .card2 {
+  width: 35vw;
+  height: 10vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.div_contact .icons_footer {
+  height: 3vh;
+  width: 25vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.div_contact .card_location {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.div_contact .card_telephone {
+  display: flex;
+  flex-direction: row;
+  width: 10vw;
+  justify-content: space-between;
+}

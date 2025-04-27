@@ -1,0 +1,88 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+/* .body{
+    display: flex;
+    flex-direction: row;
+    background-color: #1C1D21;
+    height: 100%;
+} */
+
+.body {
+    display: flex;
+    flex-direction: row;
+    background-color: #1C1D21;
+    min-height: 100vh; /* Garante que o fundo sempre ocupe pelo menos a altura total da tela */
+    width: 100vw;
+}
+
+.conteudo {
+    flex-grow: 1; /* Faz com que a div cresça e preencha o espaço */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Garante que o fundo preto cubra toda a tela */
+    width: 100%;
+    /* width: 100vw;
+    transition: height 0.3s ease;  Transição suave entre alturas  */
+}
+
+
+.sidebar_container{
+    margin-right: 5.22rem;
+}
+
+
+.autoHeight {
+    height: 100%; /* Para até 4 cards */
+}
+
+.fullHeight {
+    height: 100vh; /* Para mais de 4 cards */
+}
+
+
+.title_page{
+    width: 100%;
+    height: 8vh;
+    display: flex;
+    text-align: center;
+    padding: 1% 1% 4% 2%;
+}
+
+.title_page h1{
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: #f0f0f0;
+}
+
+.container_btn{
+    display: flex;
+}
+
+.container {
+    width: 95%;
+    height: 75%;
+    display: grid; /* Alterado para usar Grid */
+    grid-template-columns: repeat(3, 1fr); /* Define 3 colunas */
+    gap: 20px; /* Espaço entre os cards */
+    /* overflow-y: auto; 
+    overflow-x: hidden;  */
+    white-space: normal; /* Garante que os elementos respeitem o grid */
+    padding: 10px; /* Adiciona espaçamento interno */
+}
+
+/* .container::-webkit-scrollbar {
+    height: 8px; 
+    width: 0.5rem;
+}
+
+.container::-webkit-scrollbar-thumb {
+    background-color: #fcb069; 
+    border-radius: 4px;
+} */
+/* .container::-webkit-scrollbar-track {
+    background-color: #f0f0f0; 
+} */
+

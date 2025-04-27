@@ -1,0 +1,142 @@
+* {
+    box-sizing: border-box;
+}
+
+.active{
+    color: #EA7100;
+}
+
+.navbar1{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1000;    
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    position: fixed; 
+    width: 98.7%; 
+    height: 12vh;
+    z-index: 1000; 
+    backdrop-filter: blur(10px);
+    background-color: rgba(0, 0, 0, 0.5);
+    margin-right: 10px;
+}
+
+.whiteText {
+    color: white;
+}
+
+.blackText {
+    color: black;
+}
+
+.navbar1 .logo{
+    height: 70px;
+    width: 70px;
+} 
+
+.navbar1 .buttonCadastro{
+    width: 120px;
+    text-align: center;
+    border: 1px #EA7100;
+    text-decoration: none;
+    background-color:#EA7100;
+    border-radius: 5px;
+    border: 2px solid #EA7100;
+    font-weight: bold;
+}
+
+.navbar1 .buttonLogin{
+    width: 170px;
+    text-align: center;
+    border: 1px #EA7100;
+    text-decoration: none;
+    border-radius: 5px;
+    border: 2px solid #EA7100;
+    font-weight: bold;
+}
+
+.navbar1 ul {
+    display: flex;
+    margin-bottom: 0.25rem;
+    margin-top: -111px;
+    transition: max-height 0.3s ease-in-out; 
+    max-height: 0; 
+}
+
+.navbar1 ul li{
+    list-style: none;
+    padding-top: 0px;
+}
+
+.navbar1 ul li a{
+    display: block;
+    text-decoration: none;
+    color: white;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    border-radius: 0.5rem;
+    transition: all 0.1s;
+}
+
+.navbar1 ul li a:not(.active):hover{
+    color: #EA7100;
+}
+
+.navbar1 ul li .buttonCadastro:not(.active):hover{
+    background-color: aliceblue;
+    color: #EA7100;
+    border-color: aliceblue;
+}
+
+.navbar1 .menu{
+    display: none;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 2.2rem;
+    height: 2rem;
+}
+
+.navbar1 .menu span{
+    height: 0.2rem;
+    width: 80%;
+    background-color: white;
+    border-radius: 0.2rem;
+}
+
+
+
+@media (max-width: 480px) {
+    .navbar1 .menu{
+        display: flex;
+        margin: 1vh 1vh 0 0;
+    }
+
+    .navbar1{
+        flex-direction: column;
+        align-items: start;
+    }
+
+    .navbar1 ul{
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 0.25rem;
+    }
+
+    .navbar1 ul.open{
+        display: flex;
+    }
+
+    .navbar1 ul li{
+        width: 100%;
+        text-align: center;
+    }
+
+    .navbar1 ul li a{
+        margin: 0.2rem 0.5rem;
+    }
+}

@@ -1,0 +1,34 @@
+.navbar{
+    display: flex;
+    flex-direction: column;
+    background-color: #292C3B;
+    width: 250px;
+    height: 100vh;
+    justify-content: space-between;
+}
+
+.fotoPerfil{
+    /* gap: 10px; */
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+    gap: 15px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.links{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 30px;
+    gap: 15px;
+}
+
+.botaoSair{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 30px;
+    gap: 15px;
+}

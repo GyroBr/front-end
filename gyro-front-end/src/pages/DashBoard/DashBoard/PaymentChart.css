@@ -1,0 +1,55 @@
+.chart-container {
+  background-color: #131313;
+  color: #FFF;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  width: 100%;
+  margin: 5px;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.chart-container h4 {
+  display: flex;
+}
+
+.div_content {
+  display: flex;
+}
+
+.circle-wrapper {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+}
+
+.circle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.legend {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 8px;
+}

@@ -1,0 +1,119 @@
+:root {
+    --card-width: 281px;
+    --card-height: 372px;
+    --scale-factor: 0.9;
+}
+
+.card_cardapio {
+    width: calc(var(--card-width) * var(--scale-factor));
+    height: calc(var(--card-height) * var(--scale-factor));
+    margin: calc(1rem * var(--scale-factor));
+    display: flex;
+    border-radius: calc(5px * var(--scale-factor));
+    text-align: center;
+    align-items: center;
+    background-color: #131313;
+}
+
+
+.container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding: 1rem;
+    text-align: center;
+    align-items: center;
+    border-radius: 0.7rem;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.img{
+    width: 176px;
+    height: 115px;
+    display: flex;
+    justify-content: center;
+}
+
+.upload_img {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    background-color: #1C1D21;
+    overflow: hidden; /* Impede que a imagem ultrapasse os limites da div */
+}
+
+.upload_img img {
+    width: 100%; /* Faz a imagem ocupar a largura total da div */
+    height: 100%; /* Ajusta a altura para preencher a div */
+    object-fit: cover; /* Garante que a imagem preencha a div proporcionalmente */
+    border-radius: 5px; /* Mantém o mesmo arredondamento da div externa */
+}
+
+.container_info{
+    width: 100%;
+    display: flex;
+    text-align: justify;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.container_info span{
+    height: auto;
+}
+
+.tittle{
+    height: 4vh;
+    border: none;
+    display: flex;
+    font-size: 14px;
+    color: #F0F0F0;
+    margin: 1% 0 3% 0;
+}
+
+.description {
+    border: none;
+    height: auto;
+    display: flex;
+    font-size: 10px;
+    line-height: 1.2; 
+    color: #F0F0F0;
+    word-wrap: break-word; 
+}
+
+
+.price {
+    border: none;
+    display: flex;
+    font-size: 14px;
+    color: #F0F0F0;
+}
+
+.line .icon{
+    font-size: 14px;
+    color: #FCB069;
+    margin-left: 3.3rem;
+}
+
+.buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.buttonCard {
+    margin: 0;
+    width: 78px;
+    height: 29px;
+    color: #F0F0F0;
+    border-radius: 3px;
+    transition: all linear 0.2s;
+    border: 0.7px solid #F0F0F0;
+    background: rgba(240, 240, 240, 0.00);
+}
+.buttonCard:hover {
+    scale: 1.03;
+    background: #F0F0F0;
+    border: 0.7px solid #F0F0F0;
+    color: black
+}

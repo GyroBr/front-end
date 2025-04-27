@@ -1,0 +1,55 @@
+.container_card{
+    height: 550px;
+    width: 40%;
+}
+
+.card_btn{
+    color: #f0f0f0;
+    height: 50px;
+    width: 100%;
+    font-size: 1.5rem;
+    border: none;
+    background-color: transparent;
+    border-bottom: 1px solid #f0f0f0;
+    text-align: left;
+}
+
+.icon{
+    margin-left: 1rem;
+}
+
+.card{
+    height: 8rem;
+    margin: 30px 0 0 0 ;
+    display: flex;
+    justify-content: space-between;
+}
+
+.card_func{
+    height: 100%;
+    width: 85%;
+    border: 1px solid #f0f0f0;
+    border-radius: 5px;
+    color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 10px 0 10px 20px;
+    font-size: 1rem;
+}
+
+.card_edit{
+    height: 100%;
+    width: 12%;
+    border: 1px solid #f0f0f0;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.icon_card{
+    color: #f0f0f0;
+    font-size: 1.2rem;
+}

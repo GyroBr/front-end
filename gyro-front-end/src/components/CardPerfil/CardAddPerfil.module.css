@@ -1,0 +1,99 @@
+.body{
+    background-color: #1C1D21;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.line{
+    /* background-color: #6982fc; */
+    display: flex;
+    flex-direction: column;
+}
+
+.box{
+    /* background-color: chartreuse; */
+    width: 50%;
+    height: 75px;
+    display: flex;
+    flex-direction: column;
+}
+
+span{
+    color: #f0f0f0;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.input_a{
+    background-color: #1C1D21;
+    border-bottom: solid 1px #f0f0f0;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    width: 12rem;
+    font-size: 0.7rem;
+    height: 1.5rem;
+    padding: 0 0 0 5px;
+    color: #f0f0f0;
+}
+
+.card{
+    margin: 30px 0 0 0 ;
+    display: flex;
+    justify-content: space-between;
+    /* background-color: #ff613d; */
+    border: 1px solid #f0f0f0;
+    border-radius: 5px;
+    width: 300px;
+    height: 320px;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card_func{
+    width: 80%;
+    height: fit-content;
+    /* border: 1px solid #f0f0f0; */
+    border-radius: 5px;
+    color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 10px 0 10px 20px;
+    font-size: 1rem;
+}
+
+.card_edit{
+    height: 100%;
+    width: 8%;
+    border-left: 1px solid #f0f0f0;
+    border-radius: 0 5px 5px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.icon_card{
+    color: #f0f0f0;
+    font-size: 1.2rem;
+}
+
+.btn_Employee{
+    background-color: chocolate;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    width: 5.5rem;
+    height: 1.7rem;
+    color: #f0f0f0;
+    font-weight: 500;
+}
+
+.card_button{
+    display: flex;
+    justify-content: space-between;
+    width: 65%;
+}
