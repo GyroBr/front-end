@@ -10,7 +10,7 @@ const api = axios.create({
 export const auth = async (data) => {
     try {
         console.log('Dados enviados:', data);
-        const response = await api.post("/api/auths/login", data);
+        const response = await api.post("/auths/login", data);
         return response.data;
     } catch (error) {
         console.error("Erro ao logar:", error.response?.data || error.message);

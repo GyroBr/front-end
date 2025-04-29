@@ -6,7 +6,7 @@ const api = axios.create({
 
 export default async function viaCepService(cep) {
   try {
-    const response = await api.get(`/api/externals/${cep}`);
+    const response = await api.get(`/externals/${cep}`);
     const data = response.data;
 
     console.log(data);

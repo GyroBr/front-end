@@ -9,7 +9,7 @@ const api = axios.create({
 
 export const registerEnterprise = async (empresa) => {
   try {
-    const response = await api.post(`/api/companies/register`, empresa);
+    const response = await api.post(`/companies/register`, empresa);
     return response;
   } catch (error) {
     throw error;
@@ -18,7 +18,7 @@ export const registerEnterprise = async (empresa) => {
 
 export const getEnterpriseById = async (token) => {
   try {
-    const response = await api.get(`/api/companies/get-company-info`, {
+    const response = await api.get(`/companies/get-company-info`, {
       headers: {
         "Authorization": token
       }
@@ -31,7 +31,7 @@ export const getEnterpriseById = async (token) => {
 
 export const isAdmin = async (token) => {
   try {
-    const response = await api.get(`/api/auths/is-admin`, {
+    const response = await api.get(`/auths/is-admin`, {
       headers: {
         "Authorization": token
       }

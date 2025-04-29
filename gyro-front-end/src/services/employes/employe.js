@@ -9,7 +9,7 @@ const api = axios.create({
 
 export const registerEmployee = async (token, formData) => {
   try {
-    const response = await api.post(`/api/employees/register`, formData, {
+    const response = await api.post(`/employees/register`, formData, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -22,7 +22,7 @@ export const registerEmployee = async (token, formData) => {
 
 export const getEmployees = async (token) => {
   try {
-    const response = await api.get(`/api/companies/get-company-info`, {
+    const response = await api.get(`/companies/get-company-info`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
