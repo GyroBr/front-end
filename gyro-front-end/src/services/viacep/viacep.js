@@ -1,23 +1,21 @@
 import axios from "axios";
 
-export default async function viaCepService(cep) {
-  // const uriViaCep = `https://viacep.com.br/ws/${cep}/json/`;
-  // const uriViaCep = `http://gyro-back-end-monolito:8080/externals/${cep}`;
-  const uriViaCep = `/api/externals/${cep}`;
+const api = axios.create({
+  baseURL: 'https://18.215.23.142'
+});
 
+export default async function viaCepService(cep) {
   try {
-    const response = await axios.get(uriViaCep);
+    const response = await api.get(`/api/externals/${cep}`);
     const data = response.data;
 
     console.log(data);
 
-    // Verifique se a API retornou um erro
     if (data.erro) {
       console.error('Erro ao buscar o CEP:', data.erro);
       return null;
     }
 
-    // Retorne um objeto com os dados esperados
     return {
       logradouro: data.logradouro || "",
       bairro: data.bairro || "",
