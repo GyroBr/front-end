@@ -1,12 +1,8 @@
 version: "3.8"
 services:
   frontend-dev:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
+    image: eduardomelodeoliveira/gyro-application-prod:frontend-v4
     container_name: gyro-frontend-dev-container
-    volumes:
-      - /app/node_modules
     ports:
       - "5173:5173"
     environment:

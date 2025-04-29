@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: 'https://18.215.23.142/api',
+  baseURL: "https://18.232.231.57",
   headers: {
     "Content-Type": "application/json"
   }
@@ -42,23 +42,23 @@ export const getProducts = async (token) => {
   }
 };
 
-// export const getProductImage = async (token, productId) => {
-//   try {
-//     const response = await api.get(`/images/render/${productId}`, {
-//       headers: {
-//         Authorization: `Bearer ${token}`,
-//       },
-//       responseType: 'blob',
-//     });
+export const getProductImage = async (token, productId) => {
+  try {
+    const response = await api.get(`/images/render/${productId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      responseType: 'blob',
+    });
 
-//     const imageBlob = new Blob([response.data], { type: response.headers['content-type'] });
-//     const imageUrl = URL.createObjectURL(imageBlob);
-//     return imageUrl;
-//   } catch (error) {
-//     console.error("Erro ao tentar obter a imagem do produto:", error.response?.data || error.message);
-//     throw error;
-//   }
-// };
+    const imageBlob = new Blob([response.data], { type: response.headers['content-type'] });
+    const imageUrl = URL.createObjectURL(imageBlob);
+    return imageUrl;
+  } catch (error) {
+    console.error("Erro ao tentar obter a imagem do produto:", error.response?.data || error.message);
+    throw error;
+  }
+};
 
 export const editProduct = async (token, productId, productBody) => {
   try {

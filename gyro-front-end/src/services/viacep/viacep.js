@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: 'https://18.215.23.142'
+  baseURL: "https://18.232.231.57"
 });
 
 export default async function viaCepService(cep) {
