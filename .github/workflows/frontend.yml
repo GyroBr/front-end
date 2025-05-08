@@ -37,3 +37,5 @@ jobs:
               cd ~/infra
               sudo docker-compose pull frontend-dev
               sudo docker-compose up -d --no-deps --build frontend-dev
+
+              
