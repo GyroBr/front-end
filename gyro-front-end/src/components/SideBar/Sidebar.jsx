@@ -3,13 +3,14 @@ import { useNavigate } from "react-router-dom";
 import styles from "../SideBar/Sidebar.module.css";
 import { CiLogout } from "react-icons/ci";
 import {
-    BsBarChartFill,
+    BsBarChart,
     BsReverseLayoutTextSidebarReverse,
     BsBox,
     BsCart4,
     BsJustify,
     BsPerson,
     BsBoxArrowLeft,
+    BsHouseGear,
 } from "react-icons/bs";
 import { MdOutlineMenuBook } from "react-icons/md";
 import { getEnterpriseById, isAdmin } from "../../services/enterprise/enterprise";
@@ -99,7 +100,7 @@ const Menu = () => {
                 <li className={styles.item_menu} style={{display: admin ? "block" : "none"}}>
                     <a href="/dashPage">
                         <span className={styles.icon}>
-                            <BsBarChartFill />
+                            <BsBarChart />
                         </span>
                         <span className={styles.txt_link}>DashBoard</span>
                     </a>
@@ -133,14 +134,14 @@ const Menu = () => {
                     </a>
                 </li>
 
-                 {/* <li className={styles.item_menu}>
-                    <a href="/CardapioPage">
+                <li className={styles.item_menu}>
+                    <a href="/profile">
                         <span className={styles.icon}>
-                            <MdOutlineMenuBook  />
+                            <BsHouseGear   />
                         </span>
-                        <span className={styles.txt_link}>Menu</span>
+                        <span className={styles.txt_link}>Perfil</span>
                     </a>
-                </li>  */}
+                </li> 
 
                 <li className={styles.item_menu}
                  style={{display: admin ? "block" : "none"}}
@@ -149,7 +150,7 @@ const Menu = () => {
                         <span className={styles.icon}>
                             <BsPerson />
                         </span>
-                        <span className={styles.txt_link}>Perfil</span>
+                        <span className={styles.txt_link}>Funcionários</span>
                     </a>
                 </li>
 

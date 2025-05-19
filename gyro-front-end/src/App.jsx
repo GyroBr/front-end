@@ -4,9 +4,10 @@ import HomePage from "./pages/Home/HomePage.jsx";
 import RegisterPage from "./pages/Register/RegisterPage.jsx";
 import HistoryPage from "./pages/History/HistoryPage.jsx";
 import BarChart from "./pages/DashBoard/DashBoardBottom/BarChart.jsx";
-import DashPage from "./pages/DashBoard/DashPage";
+import DashPage from "./pages/DashBoard/DashPage.jsx";
 import StockPage from "./pages/Estoque/StockPage.jsx";
 import EmployeePage from "./pages/Employee/EmployeePage";
+import ProfilePage from "./pages/Profile/ProfilePage";
 import OrderPage from "./pages/Order/OrderPage";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path="/dashPage" element={<DashPage />} />
         <Route path="/stock" element={<StockPage/>} />
         <Route path="/employee" element={<EmployeePage />} />
+        <Route path="/profile" element={<ProfilePage />} />
         <Route path="/order" element={<OrderPage/>} />
       </Routes>
     </Router>
