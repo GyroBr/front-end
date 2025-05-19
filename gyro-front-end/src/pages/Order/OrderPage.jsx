@@ -17,24 +17,23 @@ const OrderPage = () => {
   const [loading, setLoading] = useState(true);
   const [isFullHeight, setIsFullHeight] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const token = sessionStorage.getItem("token");
   const [paymentMethod, setPaymentMethod] = useState("");
   const [cashGiven, setCashGiven] = useState(0);
+  const [objectUrls, setObjectUrls] = useState([]);
 
   const handlePaymentMethodChange = (method) => setPaymentMethod(method);
   const handleCashGivenChange = (amount) => setCashGiven(amount);
 
   useEffect(() => {
+    const token = sessionStorage.getItem("token");
     const fetchProducts = async () => {
       try {
         const fetchedProducts = await getProducts(token);
 
         const productsWithImages = await Promise.all(
           fetchedProducts.map(async (product) => {
-            const imageUrl = product.image
-              ? await getProductImage(token, product.image)
-              : "/path/to/default/image.png";
-
+            const imageUrl = await getProductImage(token, product.productId);
+            setObjectUrls((prev) => [...prev, imageUrl]);
             return {
               ...product,
               image: imageUrl,
@@ -52,24 +51,18 @@ const OrderPage = () => {
     };
 
     fetchProducts();
+
+    return () => {
+      objectUrls.forEach((url) => URL.revokeObjectURL(url));
+    };
   }, [token]);
 
   const handleCategorySelect = (category) => {
-    console.log("Categoria selecionada:", category);
     setSelectedCategory(category);
   };
 
-  // Filtro por categoria
   const filteredProducts = selectedCategory
-    ? products.filter((product) => {
-        console.log(
-          "Verificando produto:",
-          product.category,
-          "com categoria selecionada:",
-          selectedCategory
-        );
-        return product.category === selectedCategory;
-      })
+    ? products.filter((product) => product.category === selectedCategory)
     : products;
 
   const updateCart = (id, quantity, name, price) => {
@@ -95,18 +88,16 @@ const OrderPage = () => {
 
   const handleCreateOrder = async () => {
     const orderData = {
-      paymentMethod: paymentMethod, // Exemplo de valor padrão
+      paymentMethod: paymentMethod,
       amountOfMoneyGiven: paymentMethod === "MONEY" ? cashGiven : null,
       orderProduct: Object.entries(cartItems).map(([id, { quantity }]) => ({
         productId: parseInt(id, 10),
         quantity,
       })),
     };
-    console.log("order data: ", orderData.amountOfMoneyGiven);
 
     try {
       const response = await createOrder(token, orderData);
-      console.log(response);
       setCartItems({});
       if (response.status === 200) {
         setTimeout(() => {
@@ -121,7 +112,6 @@ const OrderPage = () => {
       toast.error(`Erro ao tentar criar o pedido: ${errorMessage}`, {
         autoClose: 1500,
       });
-      console.error("Erro ao criar pedido:", errorMessage);
     }
   };
 

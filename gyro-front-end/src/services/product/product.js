@@ -1,29 +1,19 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://18.232.231.57",
+  baseURL: import.meta.env.VITE_HTTPS_IP_ADDRESS,
   headers: {
     "Content-Type": "application/json"
   }
 });
 
 export const registerProduct = async (token, formData) => {
-  for (let pair of formData.entries()) {
-    console.log('product js', pair[0], pair[1]);
-  }
-
   try {
-    console.log("Dados formatados:", Array.from(formData.entries()));
-    console.log(token, "token que chegou");
-
-    const response = await api.post(`/products/register`, formData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+    return await api.post(`/products/register`, formData, {
+      headers: { Authorization: `Bearer ${token}` }
     });
-
-    return response;
   } catch (error) {
+    console.error("Erro ao registrar produto:", error.response?.data || error.message);
     throw error;
   }
 };
@@ -31,13 +21,12 @@ export const registerProduct = async (token, formData) => {
 export const getProducts = async (token) => {
   try {
     const response = await api.get(`/products/get-all-by-company`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      headers: { Authorization: `Bearer ${token}` }
     });
+    console.log(token)
     return response.data;
   } catch (error) {
-    console.error("Erro ao tentar obter os produtos:", error.response?.data || error.message);
+    console.error("Erro ao buscar produtos:", error.response?.data || error.message);
     throw error;
   }
 };
@@ -45,62 +34,46 @@ export const getProducts = async (token) => {
 export const getProductImage = async (token, productId) => {
   try {
     const response = await api.get(`/images/render/${productId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      responseType: 'blob',
+      headers: { Authorization: `Bearer ${token}` },
+      responseType: 'blob'
     });
-
     const imageBlob = new Blob([response.data], { type: response.headers['content-type'] });
-    const imageUrl = URL.createObjectURL(imageBlob);
-    return imageUrl;
+    return URL.createObjectURL(imageBlob);
   } catch (error) {
-    console.error("Erro ao tentar obter a imagem do produto:", error.response?.data || error.message);
+    console.error("Erro ao carregar imagem:", error.response?.data || error.message);
     throw error;
   }
 };
 
 export const editProduct = async (token, productId, productBody) => {
   try {
-    console.log(productBody, "dados para edição");
-    console.log(token, "token que chegou");
-    const response = await api.put(`/products/${productId}`, productBody, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+    return await api.put(`/products/${productId}`, productBody, {
+      headers: { Authorization: `Bearer ${token}` }
     });
-    return response;
   } catch (error) {
-    console.error("Erro ao tentar editar o produto:", error.response?.data || error.message);
+    console.error("Erro ao editar produto:", error.response?.data || error.message);
     throw error;
   }
 };
 
 export const getAllCategories = async (token) => {
   try {
-    const response = await api.get(`/products/get-categories`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
+    return await api.get(`/products/get-categories`, {
+      headers: { Authorization: `Bearer ${token}` }
     });
-    return response;
   } catch (error) {
-    console.log("Erro ao pegar categorias");
+    console.error("Erro ao buscar categorias:", error.response?.data || error.message);
     throw error;
   }
 };
 
 export const deleteProduct = async (token, productId) => {
   try {
-    console.log(`Deletando produto com ID: ${productId}`);
-    const response = await api.delete(`/products/${productId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+    return await api.delete(`/products/${productId}`, {
+      headers: { Authorization: `Bearer ${token}` }
     });
-    return response;
   } catch (error) {
-    console.error("Erro ao tentar deletar o produto:", error.response?.data || error.message);
+    console.error("Erro ao deletar produto:", error.response?.data || error.message);
     throw error;
   }
 };

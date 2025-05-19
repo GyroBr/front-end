@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://18.232.231.57"
+  baseURL: import.meta.env.VITE_HTTPS_IP_ADDRESS
 });
 
 export default async function viaCepService(cep) {
@@ -9,12 +9,7 @@ export default async function viaCepService(cep) {
     const response = await api.get(`/externals/${cep}`);
     const data = response.data;
 
-    console.log(data);
-
-    if (data.erro) {
-      console.error('Erro ao buscar o CEP:', data.erro);
-      return null;
-    }
+    if (data.erro) return null;
 
     return {
       logradouro: data.logradouro || "",
@@ -22,7 +17,7 @@ export default async function viaCepService(cep) {
       localidade: data.localidade || "",
     };
   } catch (error) {
-    console.error("Erro na requisição do CEP:", error);
+    console.error("Erro ao consultar CEP:", error.response?.data || error.message);
     return null;
   }
 }

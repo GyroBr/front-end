@@ -10,47 +10,47 @@ import {
   getProducts,
 } from "../../services/product/product";
 
-const token = sessionStorage.getItem("token");
-
 const EstoquePage = () => {
   const [repositories, setRepositories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isFullHeight, setIsFullHeight] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
-  
+
   useEffect(() => {
-    let isMounted = true; // Variável para evitar atualizações após desmontagem
-  
+    let isMounted = true;
+
     const fetchProducts = async () => {
+      const token = sessionStorage.getItem("token");
+      if (!token) {
+        console.error("Token não encontrado.");
+        setLoading(false);
+        return;
+      }
+
       try {
         const products = await getProducts(token);
-  
+
         if (!Array.isArray(products)) {
           setLoading(false);
           return;
         }
-  
+
         const productsWithImages = await Promise.all(
           products.map(async (product) => {
-            if (!product.productId) {
-              return null;
-            }
-  
+            if (!product.productId) return null;
+
             try {
               const imageUrl = await getProductImage(token, product.productId);
-              console.log("Imagem carregada:", imageUrl);
               return { ...product, image: imageUrl };
             } catch (error) {
-              console.warn("Erro ao carregar imagem do produto:", product.productId, error);
+              console.warn("Erro ao carregar imagem:", product.productId, error);
               return { ...product, image: "/path/to/default/image.png" };
             }
           })
         );
-  
-        // Filtra produtos válidos
-        const validProducts = productsWithImages.filter((product) => product !== null);
-  
-        // Evita atualização se o componente foi desmontado
+
+        const validProducts = productsWithImages.filter(Boolean);
+
         if (isMounted) {
           setRepositories(validProducts);
           setLoading(false);
@@ -61,30 +61,20 @@ const EstoquePage = () => {
         if (isMounted) setLoading(false);
       }
     };
-  
+
     fetchProducts();
-  
+
     return () => {
-      isMounted = false; // Evita atualização do estado após desmontagem
+      isMounted = false;
     };
-  }, [token]);
-  
+  }, []);
 
   const handleCategorySelect = (category) => {
-    console.log("Categoria selecionada:", category);
     setSelectedCategory(category);
   };
 
   const filteredRepositories = selectedCategory
-    ? repositories.filter((product) => {
-        console.log(
-          "Verificando produto:",
-          product.category,
-          "com categoria selecionada:",
-          selectedCategory
-        );
-        return product.category === selectedCategory;
-      })
+    ? repositories.filter((product) => product.category === selectedCategory)
     : repositories;
 
   return (
@@ -104,7 +94,7 @@ const EstoquePage = () => {
           <NavIntern onCategorySelect={handleCategorySelect} />
         </div>
         <div className={styles.container_btn}>
-          <BtnAddProduct /> 
+          <BtnAddProduct />
         </div>
         <div className={styles.container}>
           {loading ? (
@@ -137,10 +127,7 @@ const EstoquePage = () => {
           onCreateOrder={null}
           total={repositories
             .filter((product) => product.quantity < product.warningQuantity)
-            .reduce(
-              (acc, product) => acc + product.price * product.quantity,
-              0
-            )} // Calcula o total dos produtos com status vermelho
+            .reduce((acc, product) => acc + product.price * product.quantity, 0)}
           onPaymentMethodChange={null}
           onCashGivenChange={null}
         />

@@ -1,9 +1,15 @@
 version: "3.8"
 services:
   frontend-dev:
-    image: eduardomelodeoliveira/gyro-application-prod:frontend-v4
+    build: 
+      context: .
+      dockerfile: Dockerfile
     container_name: gyro-frontend-dev-container
     ports:
       - "5173:5173"
+    env_file:
+      - .env
     environment:
       - CHOKIDAR_USEPOLLING=true
+      - HTTPS_IP_ADDRESS=${HTTPS_IP_ADDRESS}
+      - HTTP_IP_ADDRESS=${HTTP_IP_ADDRESS}
