@@ -37,8 +37,10 @@ jobs:
           username: ubuntu
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-              cd ~/infra
-              sudo docker system prune -a --volumes -f &&
-              sudo docker-compose pull frontend-dev &&
-              sudo docker-compose up -d --no-deps --build frontend-dev
+            cd ~/infra
+            sudo docker-compose down --volumes --remove-orphans
+            sudo docker system prune -a --volumes -f
+            sudo docker-compose pull frontend-dev
+            sudo docker-compose up -d --build frontend-dev
+
 
