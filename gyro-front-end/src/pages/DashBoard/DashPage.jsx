@@ -1,5 +1,5 @@
 import Sidebar from "../../components/SideBar/Sidebar";
-import styles from "../History/HistoryStyle.module.css";
+import styles from "./DashPage.module.css";
 import React, { useEffect, useState } from "react";
 import Grafico from "../../components/graficos/grafico";
 import GraficoBar from "../../components/graficos/graficoBar";

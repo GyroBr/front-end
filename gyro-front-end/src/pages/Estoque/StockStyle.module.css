@@ -3,13 +3,6 @@
     padding: 0;
 }
 
-/* .body{
-    display: flex;
-    flex-direction: row;
-    background-color: #1C1D21;
-    height: 100%;
-} */
-
 .body {
     display: flex;
     flex-direction: row;
@@ -65,7 +58,7 @@
     width: 95%;
     height: 75%;
     display: grid; /* Alterado para usar Grid */
-    grid-template-columns: repeat(3, 1fr); /* Define 3 colunas */
+    grid-template-columns: repeat(2, 1fr); /* Define 3 colunas */
     gap: 20px; /* Espaço entre os cards */
     /* overflow-y: auto; 
     overflow-x: hidden;  */
@@ -73,16 +66,7 @@
     padding: 10px; /* Adiciona espaçamento interno */
 }
 
-/* .container::-webkit-scrollbar {
-    height: 8px; 
-    width: 0.5rem;
+.container p{
+    color: aliceblue;
+    padding: 2rem;
 }
-
-.container::-webkit-scrollbar-thumb {
-    background-color: #fcb069; 
-    border-radius: 4px;
-} */
-/* .container::-webkit-scrollbar-track {
-    background-color: #f0f0f0; 
-} */
-

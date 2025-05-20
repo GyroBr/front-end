@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../ModaisEmployee/ModalExcluirEmployee.module.css";
 import { useState } from "react";
-// import { deleteEmployee } from "../../services/Employee/employe";
+import { deleteEmployee } from "../../services/employes/employe";
 
 export default function ModalExcluir({ isOpen, setModalOpen, employeeId }) {
 

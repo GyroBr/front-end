@@ -1,17 +1,29 @@
 // BtnAddCombo.jsx
-import React from "react";
+import React, { useState } from "react";
 import styles from "../Button/BtnAddCombo.module.css";
-// import { BsPlusLg } from "react-icons/bs";
-import { FaFilterCircleXmark } from "react-icons/fa6";
-    
-
+import { BsPlusLg } from "react-icons/bs";
+import ModalAdicionarProduto from "../../components/ModaisLote/ModalAdicionarCombo";
 
 const BtnAddCombo = () => {
-    console.log('click')
-    return (
-        <button className={styles.btn_add}>
-      Limpar filtro <FaFilterCircleXmark className={styles.icon} />
-    </button>
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
+  return (
+    <>
+      <button onClick={openModal} className={styles.btn_add}>
+        Adicionar Combo <BsPlusLg className={styles.icon} />
+      </button>
+      <div>
+        {isModalOpen && (
+          <ModalAdicionarProduto
+            isOpen={isModalOpen}
+            setModalOpen={closeModal}
+          />
+        )}
+      </div>
+    </>
   );
 };
 

@@ -9,6 +9,9 @@ import StockPage from "./pages/Estoque/StockPage.jsx";
 import EmployeePage from "./pages/Employee/EmployeePage";
 import ProfilePage from "./pages/Profile/ProfilePage";
 import OrderPage from "./pages/Order/OrderPage";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function App() {
   return (
@@ -26,6 +29,8 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/order" element={<OrderPage/>} />
       </Routes>
+      {/* Toastify container */}
+      <ToastContainer osition="top-right" autoClose={3000}/>
     </Router>
   );
 }

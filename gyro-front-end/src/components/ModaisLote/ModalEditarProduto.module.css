@@ -9,72 +9,104 @@
 }
 
 .modalContentStyle {
-    top: 50%;
-    left: 50%;
-    width: 870px;
-    height: 600px;
-    padding: 80px;
-    position: fixed;
-    color: #F0F0F0;
-    align-items: center;
-    border-radius: 10px;
-    background: #1C1D21;
-    flex-direction: column;
-    border: #FFA858 solid 1px;
-    background-color: #0c0c0c;
-    transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  width: 550px;
+  height: 600px;
+  padding: 50px;
+  position: fixed;
+  color: #F0F0F0;
+  align-items: center;
+  border-radius: 10px;
+  background: #1C1D21;
+  flex-direction: column;
+  border: #FFA858 solid 1px;
+  background-color: #0c0c0c;
+  transform: translate(-50%, -50%);
 }
 
 .contents {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: space-between;
+  width: 100%;
+  height: 91%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding-right: 10px;
 }
+  .contents::-webkit-scrollbar {
+    width: 6px; /* Largura do scrollbar */
+  }
+  
+  .contents::-webkit-scrollbar-thumb {
+    background-color: #FFA34E; /* Cor do thumb do scrollbar */
+    border-radius: 10px; /* Bordas arredondadas */
+  }
+  
+  .contents::-webkit-scrollbar-track {
+    background: transparent; /* Fundo transparente */
+  }
+
+  .contents h6 {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 140%;
+    font-style: normal;
+    margin-bottom: 3px;
+    color: #f0f0f0;
+  }
 
 .buttons {
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
+}
+
+.btn_cancel,
+.btn_confirm {
+  height: 30px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 140%;
+  font-style: normal;
+  border-radius: 5px;
+  border: transparent;
+  transition: all 0.35s;
+  font-family: "Open Sans";
 }
 
 .btn_cancel {
-    width: 84px;
-    height: 30px;
-    color: #FFF;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 140%; /* 22.4px */
-    font-style: normal;
-    border-radius: 5px;
-    border: transparent;
-    transition: all 0.35s;
-    background: #303030;
-    font-family: "Open Sans";
+  width: 84px;
+  background: #303030;
+  color: #FFF;
 }
 .btn_cancel:hover {
-    scale: 1.05;
+  scale: 1.01;
+  cursor: pointer;
 }
 
 .btn_confirm {
-    width: 107px;
-    height: 30px;
-    color: #FFF;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 140%; /* 22.4px */
-    font-style: normal;
-    border-radius: 5px;
-    border: transparent;
-    transition: all 0.35s;
-    background: #FFA858;
-    font-family: "Open Sans";
+  width: 107px;
+  background: #FFA858;
+  color: #FFF;
 }
 .btn_confirm:hover {
-    scale: 1.05;
+  scale: 1.01;
+  cursor: pointer;
+}
+
+.btn_x {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  color: #FFA858;
+  font-size: 25px;
+}
+.btn_x:hover {
+  scale: 1.05;
+  cursor: pointer;
 }
 
 .add_image {
@@ -116,21 +148,34 @@
   display: flex;
   gap: 120px; /* Espaço entre os campos */
   margin-bottom: 2rem;
+  flex-wrap: wrap;
 }
 
 .inputWrapper {
   flex: 1; /* Faz com que cada campo ocupe o mesmo espaço */
 }
+.inputGroup {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+}
 
 .inputs_square {
-  border: none; 
-  border-bottom: 1px solid #ccc; 
-  outline: none; 
-  padding: 8px; 
-  width: 100%; 
-  background-color: transparent; 
-  color: #fff; 
-  font-size: 16px; 
+  border: 1px solid #858585;
+  border-radius: 8px;
+  outline: none;
+  padding: 8px;
+  width: 100%;
+  background-color: #101012;
+  color: #fff;
+  font-size: 16px;
 }
 
 .inputs_square:focus {
@@ -141,6 +186,16 @@
   background-color: #fff; /* Fundo branco para contraste */
 }
 
+.titleWrapper {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  border-bottom: #858585 solid 1px;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
 /* Estilo para o upload de imagens */
 .uploadLabel {
   display: flex;

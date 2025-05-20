@@ -3,9 +3,9 @@
     flex-wrap: wrap;
     justify-content: space-around;
     color: white;
-    padding: 1px; /* 30% menor que 20px */
-    border-radius: 7px; /* 30% menor que 10px */
-}
+    padding: 1px; 
+    border-radius: 7px; 
+} 
 
 .top-products {
     font-size: 5px;
@@ -70,7 +70,7 @@
 }
 
 .pie-chart {
-    width: 220px;
+    width: 20px;
     height: 220px;
     flex-shrink: 0;
     display: flex;

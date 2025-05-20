@@ -1,20 +1,15 @@
 import React, { useState, useEffect } from "react";
-import styles from "./ModalAdicionarProduto.module.css";
+import styles from "./ModalAdicionarCombo.module.css";
 import { registerProduct } from "../../services/product/product";
 import { BsX } from "react-icons/bs";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 export default function ModalAdicionar({ isOpen, setModalOpen, onAddSuccess }) {
   const [product, setProduct] = useState({
     name: "",
-    description: "",
     price: "",
-    quantity: "",
-    expirationDate: "",
     category: "",
     image: null,
-    warningQuantity: "",
-    volume: "",
   });
 
   const [previewUrl, setPreviewUrl] = useState(null);
@@ -53,12 +48,7 @@ export default function ModalAdicionar({ isOpen, setModalOpen, onAddSuccess }) {
       const productData = {
         name: product.name,
         price: product.price,
-        category: product.category,
-        volume: product.volume,
         quantity: product.quantity,
-        warningQuantity: product.warningQuantity,
-        expiresAt: product.expirationDate,
-        barCode: product.description,
       };
 
       formData.append(
@@ -100,7 +90,7 @@ export default function ModalAdicionar({ isOpen, setModalOpen, onAddSuccess }) {
     <div className={styles.background}>
       <div className={styles.modalContentStyle}>
         <div className={styles.titleWrapper}>
-          <h4 className={styles.title}>Adicione um Produto</h4>
+          <h4 className={styles.title}>Adicione um Combo</h4>
           <button className={styles.btn_x} onClick={() => setModalOpen(false)}>
             <BsX />
           </button>
@@ -132,7 +122,7 @@ export default function ModalAdicionar({ isOpen, setModalOpen, onAddSuccess }) {
             </div>
           </div>
 
-          {/* Quantidade e Aviso */}
+          {/* Quantidade e Aviso
           <div className={styles.inputGroup}>
             <div className={styles.inputWrapper}>
               <h6>Quantidade</h6>
@@ -156,44 +146,7 @@ export default function ModalAdicionar({ isOpen, setModalOpen, onAddSuccess }) {
                 onChange={handleInputChange}
               />
             </div>
-          </div>
-
-          {/* Validade e Volume*/}
-          <div className={styles.inputGroup}>
-            <div className={styles.inputWrapper}>
-              <h6>Data de Validade</h6>
-              <input
-                type="date"
-                name="expirationDate"
-                value={product.expirationDate}
-                className={styles.inputs_square}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className={styles.inputWrapper}>
-              <h6>Volume</h6>
-              <input
-                type="text"
-                name="volume"
-                value={product.volume}
-                className={styles.inputs_square}
-                onChange={handleInputChange}
-              />
-            </div>
-          </div>
-
-          {/* Código de barras */}
-          <div className={styles.row}>
-            <div className={styles.inputWrapper}>
-              <h6>Código de barras</h6>
-              <input
-                name="description"
-                className={styles.inputs_square}
-                value={product.description}
-                onChange={handleInputChange}
-              />
-            </div>
-          </div>
+          </div> */}
 
           {/* Categoria */}
           <div className={styles.row}>
@@ -209,6 +162,33 @@ export default function ModalAdicionar({ isOpen, setModalOpen, onAddSuccess }) {
               />
             </div>
           </div>
+
+          {/* Validade */}
+          {/* <div className={styles.row}>
+            <div className={styles.inputWrapper}>
+              <h6>Data de Validade</h6>
+              <input
+                type="date"
+                name="expirationDate"
+                value={product.expirationDate}
+                className={styles.inputs_square}
+                onChange={handleInputChange}
+              />
+            </div>
+          </div> */}
+
+          {/* Código de barras */}
+          {/* <div className={styles.row}>
+            <div className={styles.inputWrapper}>
+              <h6>Código de barras</h6>
+              <input
+                name="description"
+                className={styles.inputs_square}
+                value={product.description}
+                onChange={handleInputChange}
+              />
+            </div>
+          </div> */}
 
           {/* Upload de Imagem com Preview e Botão de Remover */}
           <div className={styles.row}>

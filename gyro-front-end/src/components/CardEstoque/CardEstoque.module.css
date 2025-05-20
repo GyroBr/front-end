@@ -1,6 +1,6 @@
 .card_estoque{
-    width: 310px;
-    height: 210px;
+    width: 440px;
+    height: 250px;
     background-color: #131313;
     border-radius: 10px;
     margin: 1% 0 0 3%;
@@ -35,8 +35,8 @@
 
 .line{
     background-color: #1C1D21;
-    width: 130px;
-    height: 20px;
+    width: 180px;
+    height: 28px;
     border-radius: 5px;
     margin: 0 0 3% 0;
     border: none;
@@ -53,8 +53,8 @@
 }
 
 .upload_img {
-    width: 85px;
-    height: 85px;
+    width: 100px;
+    height: 100px;
     background-color: #1C1D21;
     border-radius: 6.25rem; /* Mantém o formato circular */
     overflow: hidden; /* Impede que o conteúdo ultrapasse a div */
@@ -78,14 +78,14 @@
 
 .text{
     color: aliceblue;
-    font-size: 8px;
+    font-size: 11px;
     margin-left: 5px;
 }
 
 .box{
     background-color: #1C1D21;
-    width: 130px;
-    height: 190px;
+    width: 170px;
+    height: 205px;
     border-radius: 5px;
     padding: 1rem 0.8rem 1rem 0.8rem;
     display: flex;
@@ -134,6 +134,12 @@
     padding: 0 1rem 0 1rem;
 }
 
+/* button:hover{
+    scale: 1.05;
+    border: none;
+    cursor: pointer;
+} */
+
 .box_btn{
     width: 100%;
     margin-top: 1rem;
@@ -153,6 +159,16 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    transition: all 0.3s;
+}
+.box_btn .btn_edit_delete:hover{
+    scale: 1.05;
+    background-color: #f0f0f0;
+    color: #131313;
+    cursor: pointer;
+    .text{
+        color: #131313;
+    }
 }
 
 .date {

@@ -29,7 +29,7 @@ const CardOrder = ({ id, name, price, image, onUpdateCart, productQuantity }) =>
       </div>
       <div className={styles.container_info}>
         <h3 className={styles.textName}>{name}</h3>
-        <p className={styles.textPrice}>R$ {price},00</p>
+        <p className={styles.textPrice}>R${price}</p>
         <p className={styles.textProductQuantity}>
           Em estoque: {productQuantity}
         </p>

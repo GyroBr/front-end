@@ -40,7 +40,7 @@
 ul {
     height: 100%;
     list-style-type: none;
-    padding-top: 3.75rem;
+    padding-top: 8rem;
     padding-left: 2rem;
 }
 
@@ -81,7 +81,6 @@ ul li.item_menu a .icon > svg {
 /* sair */
 ul li.item_menu_out a {
     list-style-type: none;
-    margin-top: 100%;
     text-decoration: none;
     font-size: 1.25rem;
     padding: 1.25rem 0;
@@ -93,9 +92,11 @@ ul li.item_menu_out a .txt_link {
     color: #fff;
     margin-left: 2rem;
     font-size: 1rem;
+    margin-top: 20px;
 }
 
 ul li.item_menu_out a .icon > svg {
     color: #FCB069;
+    margin-top: 23px;
     font-size: 1rem;
 }
