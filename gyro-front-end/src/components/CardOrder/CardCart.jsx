@@ -18,9 +18,6 @@ const CardCart = ({ cartItems, onCreateOrder, total, onPaymentMethodChange, onCa
 
   const handleCashGivenChange = (e) => {
     const value = parseFloat(e.target.value);
-    // if(value)
-    console.log('valor total', value);
-    
     const sanitizedValue = isNaN(value) ? "" : value;
     setCashGiven(sanitizedValue);
     onCashGivenChange(sanitizedValue); // Comunica com o componente pai
@@ -48,7 +45,10 @@ const CardCart = ({ cartItems, onCreateOrder, total, onPaymentMethodChange, onCa
                       Qtd: {quantity}
                     </span>
                     <span className={styles.item_price}>
-                      R$ {price * quantity},00
+                      {(price * quantity).toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL'
+                      })}
                     </span>
                   </div>
                 </div>
@@ -65,7 +65,7 @@ const CardCart = ({ cartItems, onCreateOrder, total, onPaymentMethodChange, onCa
                 <option value="">Selecione</option>
                 <option value="CREDIT_CARD">Cartão de Crédito</option>
                 <option value="DEBIT_CARD">Cartão de Débito</option>
-                <option value="CASH">Dinheiro</option>
+                <option value="MONEY">Dinheiro</option>
                 <option value="PIX">PIX</option>
               </select>
             </div>
@@ -92,7 +92,12 @@ const CardCart = ({ cartItems, onCreateOrder, total, onPaymentMethodChange, onCa
         )}
       </div>
       <div className={styles.cart_footer}>
-        <span className={styles.total}>Total: R$ {total},00</span>
+        <span className={styles.total}>
+          Total: {Number(total).toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+          })}
+        </span>
         <button className={styles.btn_finalize} onClick={onCreateOrder}>
           Finalizar Pedido
         </button>

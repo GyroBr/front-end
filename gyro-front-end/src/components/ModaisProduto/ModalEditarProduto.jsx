@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import styles from "./ModalEditarProduto.module.css";
+import { BsX } from "react-icons/bs";
 // import { editProduct } from "../../services/produto/ProdutoService";
 import { toast } from "react-toastify";
 
@@ -53,21 +54,23 @@ export default function ModalEditar({
       // }
 
       const response = await editProduct(token, productId, formData);
-      console.log(response)
+      console.log(response);
 
       if (response.status === 200) {
-        
         setTimeout(() => {
           window.location.reload();
-      }, 1000);
-      toast.success('Produto editado com sucesso!', {
-        autoClose: 700,
-      });
+        }, 1000);
+        toast.success("Produto editado com sucesso!", {
+          autoClose: 700,
+        });
         // onEditSuccess(); // Notifica o componente pai para atualizar a lista
       }
     } catch (error) {
-      console.error("Erro ao tentar editar o produto:", error.response?.data || error.message);
-      toast.error('Erro ao tentar editar o produto', {
+      console.error(
+        "Erro ao tentar editar o produto:",
+        error.response?.data || error.message
+      );
+      toast.error("Erro ao tentar editar o produto", {
         autoClose: 700,
       });
     } finally {
@@ -82,13 +85,21 @@ export default function ModalEditar({
   return (
     <div className={styles.background}>
       <div className={styles.modalContentStyle}>
+        <div className={styles.titleWrapper}>
+          <h4 className={styles.title}>Adicione um Produto</h4>
+          <button className={styles.btn_x} onClick={() => setModalOpen(false)}>
+            <BsX />
+          </button>
+        </div>
         <div className={styles.contents}>
-          <div className={styles.row}>
+          {/* Grupo Nome e Preço */}
+          <div className={styles.inputGroup}>
             <div className={styles.inputWrapper}>
               <h6>Nome</h6>
               <input
                 className={styles.inputs_square}
                 type="text"
+                placeholder="Digite o nome"
                 name="name"
                 value={product.name}
                 onChange={handleInputChange}
@@ -99,26 +110,87 @@ export default function ModalEditar({
               <input
                 className={styles.inputs_square}
                 type="number"
+                placeholder="Digite o preço"
                 name="price"
                 value={product.price}
                 onChange={handleInputChange}
               />
             </div>
           </div>
+
+          {/* Quantidade e Aviso */}
+          <div className={styles.inputGroup}>
+            <div className={styles.inputWrapper}>
+              <h6>Quantidade</h6>
+              <input
+                type="number"
+                name="quantity"
+                value={product.quantity}
+                className={styles.inputs_square}
+                placeholder="Quantidade"
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className={styles.inputWrapper}>
+              <h6>Quantidade de Aviso</h6>
+              <input
+                type="number"
+                name="warningQuantity"
+                value={product.warningQuantity}
+                className={styles.inputs_square}
+                placeholder="Aviso de quantidade"
+                onChange={handleInputChange}
+              />
+            </div>
+          </div>
+
+          {/* Categoria */}
           <div className={styles.row}>
             <div className={styles.inputWrapper}>
               <h6>Categoria</h6>
               <input
                 className={styles.inputs_square}
                 type="text"
+                placeholder="Digite a categoria"
                 name="category"
                 value={product.category}
                 onChange={handleInputChange}
               />
             </div>
-            {/* <div className={styles.inputWrapper}>
+          </div>
+
+          {/* Validade */}
+          <div className={styles.row}>
+            <div className={styles.inputWrapper}>
+              <h6>Data de Validade</h6>
+              <input
+                type="date"
+                name="expirationDate"
+                value={product.expirationDate}
+                className={styles.inputs_square}
+                onChange={handleInputChange}
+              />
+            </div>
+          </div>
+
+          {/* Código de barras */}
+          <div className={styles.row}>
+            <div className={styles.inputWrapper}>
+              <h6>Código de barras</h6>
+              <input
+                name="description"
+                className={styles.inputs_square}
+                value={product.description}
+                onChange={handleInputChange}
+              />
+            </div>
+          </div>
+
+          {/* Upload de Imagem com Preview e Botão de Remover */}
+          {/* <div className={styles.row}>
+            <div className={styles.inputWrapper}>
               <h6>Adicionar imagem</h6>
-              <label htmlFor="imageUpload" className={styles.uploadLabel}>
+              {!previewUrl ? (
                 <input
                   id="imageUpload"
                   type="file"
@@ -127,27 +199,31 @@ export default function ModalEditar({
                   name="image"
                   onChange={handleInputChange}
                 />
-                <span className={styles.uploadText}>Clique para enviar</span>
-              </label>
-              {product.existingImage && (
-                <img
-                  src={product.existingImage}
-                  alt="Imagem do Produto"
-                  className={styles.previewImage}
-                />
+              ) : (
+                <div className={styles.previewWrapper}>
+                  <img
+                    src={previewUrl}
+                    alt="Pré-visualização"
+                    className={styles.previewImage}
+                  />
+                  <button
+                    type="button"
+                    className={styles.removeButton}
+                    onClick={() => {
+                      setProduct((prev) => ({ ...prev, image: null }));
+                      URL.revokeObjectURL(previewUrl);
+                      setPreviewUrl(null);
+                    }}
+                  >
+                    Remover imagem
+                  </button>
+                </div>
               )}
-            </div> */}
-          </div>
-          <div className={styles.div_input} id="productDescription">
-            <h6>Descrição</h6>
-            <textarea
-              className={styles.textarea_description}
-              rows="4"
-              name="description"
-              value={product.description}
-              onChange={handleInputChange}
-            />
-          </div>
+            </div>
+          </div> */}
+
+          {/* Botões */}
+
           <div className={styles.buttons}>
             <button
               className={styles.btn_cancel}

@@ -1,32 +1,26 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from "react";
-import styles from "./ModalEditarProduto.module.css";
+import styles from "./ModalEditarEmployee.module.css";
 import { BsX } from "react-icons/bs";
-// import { editProduct } from "../../services/produto/ProdutoService";
+import { updateEmployee } from '../../services/employes/employe';
 import { toast } from "react-toastify";
 
 export default function ModalEditar({
   isOpen,
   setModalOpen,
   onEditSuccess,
-  productId,
-  productId: initializeId,
+  employeeId,
+  employeeId: initializeId,
   name: initialName,
-  price: initialPrice,
-  quantity: initialQuantity,
-  warningQuantity: initialWarningQuantity,
-  category: initialCategory,
-  description: initialDescription,
+  email: initialEmail,
+  password: initialPassword,
 }) {
   // Estados locais para controlar os valores dos campos
-  const [product, setProduct] = useState({
-    productId: initializeId,
+  const [employee, setEmployee] = useState({
+    employeeId: initializeId,
     name: initialName || "",
-    description: initialDescription || "",
-    price: initialPrice || "",
-    quantity: initialQuantity || "",
-    warningQuantity: initialWarningQuantity || "",
-    category: initialCategory || "",
+    email: initialEmail || "",
+    password: initialPassword || "",
   });
 
   const token = sessionStorage.getItem("token");
@@ -36,9 +30,9 @@ export default function ModalEditar({
     const { name, value, files } = e.target;
 
     if (name === "image" && files.length > 0) {
-      setProduct((prev) => ({ ...prev, image: files[0] }));
+      setemployee((prev) => ({ ...prev, image: files[0] }));
     } else {
-      setProduct((prev) => ({ ...prev, [name]: value }));
+      setemployee((prev) => ({ ...prev, [name]: value }));
     }
   };
 
@@ -46,14 +40,11 @@ export default function ModalEditar({
   const handleConfirm = async () => {
     try {
       const formData = new FormData();
-      formData.append("name", product.name);
-      formData.append("price", product.price);
-      formData.append("category", product.category);
-      formData.append("description", product.description);
-      formData.append("quantity", product.quantity);
-      formData.append("warningQuantity", product.warningQuantity);
+      formData.append("nome", employee.name);
+      formData.append("email", employee.email);
+      formData.append("password", employee.password);
 
-      const response = await editProduct(token, productId, formData);
+      const response = await editemployee(token, employeeId, formData);
       console.log(response);
 
       if (response.status === 200) {
@@ -92,81 +83,46 @@ export default function ModalEditar({
           </button>
         </div>
         <div className={styles.contents}>
-          {/* Grupo Nome e Preço */}
+          {/* Grupo Nome */}
           <div className={styles.inputGroup}>
             <div className={styles.inputWrapper}>
               <h6>Nome</h6>
               <input
                 className={styles.inputs_square}
                 type="text"
-                placeholder="Digite o nome"
-                name="name"
-                value={product.name}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className={styles.inputWrapper}>
-              <h6>Preço</h6>
-              <input
-                className={styles.inputs_square}
-                type="number"
-                placeholder="Digite o preço"
-                name="price"
-                value={product.price}
-                onChange={handleInputChange}
-              />
-            </div>
-          </div>
-          {/* Quantidade e Aviso */}
-          <div className={styles.inputGroup}>
-            <div className={styles.inputWrapper}>
-              <h6>Quantidade</h6>
-              <input
-                type="number"
-                name="quantity"
-                value={product.quantity}
-                className={styles.inputs_square}
-                placeholder="Quantidade"
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className={styles.inputWrapper}>
-              <h6>Quantidade de Aviso</h6>
-              <input
-                type="number"
-                name="warningQuantity"
-                value={product.warningQuantity}
-                className={styles.inputs_square}
-                placeholder="Aviso de quantidade"
+                placeholder=""
+                name="nome"
+                value={employee.name}
                 onChange={handleInputChange}
               />
             </div>
           </div>
 
-          {/* Categoria */}
+          {/* E-mail */}
           <div className={styles.row}>
             <div className={styles.inputWrapper}>
-              <h6>Categoria</h6>
+              <h6>E-mail</h6>
               <input
+                type="email"
+                name="email"
+                value={employee.email}
                 className={styles.inputs_square}
-                type="text"
-                placeholder="Digite a categoria"
-                name="category"
-                value={product.category}
+                placeholder=""
                 onChange={handleInputChange}
               />
             </div>
           </div>
 
-          {/* Validade */}
+          {/* Senha */}
           <div className={styles.row}>
             <div className={styles.inputWrapper}>
-              <h6>Data de Validade</h6>
+              <h6>Senha</h6>
               <input
-                type="date"
-                name="expirationDate"
-                value={product.expirationDate}
                 className={styles.inputs_square}
+                type="password"
+                placeholder=""
+                name="password"
+                value={employee.password}
                 onChange={handleInputChange}
               />
             </div>
