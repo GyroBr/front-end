@@ -13,7 +13,8 @@ export default function ModalEditar({
   productId: initializeId,
   name: initialName,
   price: initialPrice,
-  // image: initialImage,
+  quantity: initialQuantity,
+  warningQuantity: initialWarningQuantity,
   category: initialCategory,
   description: initialDescription,
 }) {
@@ -23,9 +24,9 @@ export default function ModalEditar({
     name: initialName || "",
     description: initialDescription || "",
     price: initialPrice || "",
-    // image: null, // Para novos arquivos
+    quantity: initialQuantity || "",
+    warningQuantity: initialWarningQuantity || "",
     category: initialCategory || "",
-    // existingImage: initialImage || "", // Para exibir a imagem atual
   });
 
   const token = sessionStorage.getItem("token");
@@ -49,9 +50,8 @@ export default function ModalEditar({
       formData.append("price", product.price);
       formData.append("category", product.category);
       formData.append("description", product.description);
-      // if (product.image) {
-      //   formData.append("file", product.image);
-      // }
+      formData.append("quantity", product.quantity);
+      formData.append("warningQuantity", product.warningQuantity);
 
       const response = await editProduct(token, productId, formData);
       console.log(response);
@@ -86,7 +86,7 @@ export default function ModalEditar({
     <div className={styles.background}>
       <div className={styles.modalContentStyle}>
         <div className={styles.titleWrapper}>
-          <h4 className={styles.title}>Adicione um Produto</h4>
+          <h4 className={styles.title}>Edite o Produto</h4>
           <button className={styles.btn_x} onClick={() => setModalOpen(false)}>
             <BsX />
           </button>
@@ -117,7 +117,6 @@ export default function ModalEditar({
               />
             </div>
           </div>
-
           {/* Quantidade e Aviso */}
           <div className={styles.inputGroup}>
             <div className={styles.inputWrapper}>
@@ -172,57 +171,6 @@ export default function ModalEditar({
               />
             </div>
           </div>
-
-          {/* Código de barras */}
-          <div className={styles.row}>
-            <div className={styles.inputWrapper}>
-              <h6>Código de barras</h6>
-              <input
-                name="description"
-                className={styles.inputs_square}
-                value={product.description}
-                onChange={handleInputChange}
-              />
-            </div>
-          </div>
-
-          {/* Upload de Imagem com Preview e Botão de Remover */}
-          {/* <div className={styles.row}>
-            <div className={styles.inputWrapper}>
-              <h6>Adicionar imagem</h6>
-              {!previewUrl ? (
-                <input
-                  id="imageUpload"
-                  type="file"
-                  accept="image/*"
-                  className={styles.fileInput}
-                  name="image"
-                  onChange={handleInputChange}
-                />
-              ) : (
-                <div className={styles.previewWrapper}>
-                  <img
-                    src={previewUrl}
-                    alt="Pré-visualização"
-                    className={styles.previewImage}
-                  />
-                  <button
-                    type="button"
-                    className={styles.removeButton}
-                    onClick={() => {
-                      setProduct((prev) => ({ ...prev, image: null }));
-                      URL.revokeObjectURL(previewUrl);
-                      setPreviewUrl(null);
-                    }}
-                  >
-                    Remover imagem
-                  </button>
-                </div>
-              )}
-            </div>
-          </div> */}
-
-          {/* Botões */}
 
           <div className={styles.buttons}>
             <button
