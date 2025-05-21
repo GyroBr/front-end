@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 import styles from "./ModalExcluirProduto.module.css";
-// import { deleteProduct } from "../../services/produto/ProdutoService";
+import { deleteProduct } from "../../services/product/product";
 import { toast } from "react-toastify";
 
 export default function ModalExcluir({ isOpen, setModalOpen, productId, onDeleteSuccess }) {

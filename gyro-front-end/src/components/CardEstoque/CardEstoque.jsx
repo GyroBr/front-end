@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import styles from "./CardEstoque.module.css";
-import ModalEditarLote from "../ModaisLote/ModalEditarProduto";
-import ModalExcluirLote from "../ModaisLote/ModalExcluirProduto";
+import ModalEditarProduto from "../ModaisProduto/ModalEditarProduto";
+import ModalExcluirProduto from "../ModaisProduto/ModalExcluirProduto";
 import { BsCalendar4Event, BsFillPencilFill, BsFillTrashFill } from "react-icons/bs";
 import { GoAlert } from "react-icons/go";
 
@@ -95,7 +95,7 @@ const Card = ({
         </div>
       </div>
       {isModalDeleteOpen && (
-        <ModalExcluirLote
+        <ModalExcluirProduto
           isOpen={isModalDeleteOpen}
           setModalOpen={closeModalDelete}
           productId={id}
@@ -103,7 +103,7 @@ const Card = ({
         />
       )}
       {isModalEditOpen && (
-        <ModalEditarLote
+        <ModalEditarProduto
           isOpen={isModalEditOpen}
           setModalOpen={closeModalEdit}
           productId={id}
