@@ -7,13 +7,27 @@ const api = axios.create({
   }
 });
 
+// export const registerProduct = async (token, formData) => {
+//   try {
+//     return await api.post(`/products/register`, formData, {
+//       headers: { Authorization: `Bearer ${token}` }
+//     });
+//   } catch (error) {
+//     console.error("Erro ao registrar produto:", error.response?.data || error.message);
+//     throw error;
+//   }
+// };
+
 export const registerProduct = async (token, formData) => {
   try {
-    return await api.post(`/products/register`, formData, {
-      headers: { Authorization: `Bearer ${token}` }
+    const response = await axios.post(`${APIBASEURL}/register`, formData, {
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
     });
+    return response;
   } catch (error) {
-    console.error("Erro ao registrar produto:", error.response?.data || error.message);
     throw error;
   }
 };
