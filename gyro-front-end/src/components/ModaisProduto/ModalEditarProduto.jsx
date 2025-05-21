@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import styles from "./ModalEditarProduto.module.css";
 import { BsX } from "react-icons/bs";
-// import { editProduct } from "../../services/produto/ProdutoService";
+import { editProduct } from "../../services/product/product";
 import { toast } from "react-toastify";
 
 export default function ModalEditar({
@@ -10,23 +10,27 @@ export default function ModalEditar({
   setModalOpen,
   onEditSuccess,
   productId,
+  volume: initialVolume,
   productId: initializeId,
   name: initialName,
   price: initialPrice,
   quantity: initialQuantity,
   warningQuantity: initialWarningQuantity,
   category: initialCategory,
-  description: initialDescription,
+  barCode: initialbarCode,
+  date: expirationDate,
 }) {
   // Estados locais para controlar os valores dos campos
   const [product, setProduct] = useState({
     productId: initializeId,
     name: initialName || "",
-    description: initialDescription || "",
+    volume: initialVolume || "",
+    barCode: initialbarCode || "",
     price: initialPrice || "",
     quantity: initialQuantity || "",
     warningQuantity: initialWarningQuantity || "",
     category: initialCategory || "",
+    expirationDate: expirationDate || "",
   });
 
   const token = sessionStorage.getItem("token");
@@ -43,44 +47,74 @@ export default function ModalEditar({
   };
 
   // Função para confirmar a edição
+  // const handleConfirm = async () => {
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append("name", product.name);
+  //     formData.append("price", product.price);
+  //     formData.append("category", product.category);
+  //     formData.append("barCode", product.barCode);
+  //     formData.append("quantity", product.quantity);
+  //     formData.append("warningQuantity", product.warningQuantity);
+
+  //     const response = await editProduct(token, productId, formData);
+  //     console.log(response);
+
+  //     if (response.status === 200) {
+  //       setTimeout(() => {
+  //         window.location.reload();
+  //       }, 1000);
+  //       toast.success("Produto editado com sucesso!", {
+  //         autoClose: 700,
+  //       });
+  //       // onEditSuccess(); // Notifica o componente pai para atualizar a lista
+  //     }
+  //   } catch (error) {
+  //     console.error(
+  //       "Erro ao tentar editar o produto:",
+  //       error.response?.data || error.message
+  //     );
+  //     toast.error("Erro ao tentar editar o produto", {
+  //       autoClose: 700,
+  //     });
+  //   } finally {
+  //     setModalOpen(false);
+  //   }
+  // };
+
+  // if (!isOpen) {
+  //   return null;
+  // }
+
   const handleConfirm = async () => {
     try {
-      const formData = new FormData();
-      formData.append("name", product.name);
-      formData.append("price", product.price);
-      formData.append("category", product.category);
-      formData.append("description", product.description);
-      formData.append("quantity", product.quantity);
-      formData.append("warningQuantity", product.warningQuantity);
+      const productBody = {
+        name: product.name,
+        price: parseFloat(product.price),
+        category: product.category,
+        barCode: product.barCode,
+        volume: product.volume,
+        quantity: product.quantity,
+        warningQuantity: product.warningQuantity,
+        expirationDate: product.expirationDate,
+      };
 
-      const response = await editProduct(token, productId, formData);
-      console.log(response);
+      const response = await editProduct(token, productId, productBody);
 
       if (response.status === 200) {
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
-        toast.success("Produto editado com sucesso!", {
-          autoClose: 700,
-        });
-        // onEditSuccess(); // Notifica o componente pai para atualizar a lista
+        toast.success("Produto editado com sucesso!", { autoClose: 700 });
+        setTimeout(() => window.location.reload(), 1000);
       }
     } catch (error) {
       console.error(
         "Erro ao tentar editar o produto:",
         error.response?.data || error.message
       );
-      toast.error("Erro ao tentar editar o produto", {
-        autoClose: 700,
-      });
+      toast.error("Erro ao tentar editar o produto", { autoClose: 700 });
     } finally {
       setModalOpen(false);
     }
   };
-
-  if (!isOpen) {
-    return null;
-  }
 
   return (
     <div className={styles.background}>
@@ -144,7 +178,7 @@ export default function ModalEditar({
           </div>
 
           {/* Categoria */}
-          <div className={styles.row}>
+          <div className={styles.inputGroup}>
             <div className={styles.inputWrapper}>
               <h6>Categoria</h6>
               <input
@@ -153,6 +187,30 @@ export default function ModalEditar({
                 placeholder="Digite a categoria"
                 name="category"
                 value={product.category}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className={styles.inputWrapper}>
+              <h6>Volume</h6>
+              <input
+                type="text"
+                name="volume"
+                value={product.volume}
+                className={styles.inputs_square}
+                onChange={handleInputChange}
+              />
+            </div>
+          </div>
+
+          {/* Código de barras */}
+          <div className={styles.row}>
+            <div className={styles.inputWrapper}>
+              <h6>Código de barras</h6>
+              <input
+                type="number"
+                name="barCode"
+                className={styles.inputs_square}
+                value={product.barCode}
                 onChange={handleInputChange}
               />
             </div>
