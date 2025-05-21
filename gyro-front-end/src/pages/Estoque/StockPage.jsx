@@ -56,7 +56,7 @@ const EstoquePage = () => {
         if (isMounted) {
           setRepositories(validProducts);
           setLoading(false);
-          setIsFullHeight(validProducts.length > 6);
+          setIsFullHeight(validProducts.length >= 3);
         }
       } catch (error) {
         console.error("Erro ao buscar produtos", error);
@@ -107,7 +107,7 @@ const EstoquePage = () => {
         </div>
         <div className={styles.container_btn}>
           <BtnAddProduct /> 
-          <BtnAddCombo />
+          {/* <BtnAddCombo /> */}
         </div>
         <div className={styles.container}>
           {loading ? (
