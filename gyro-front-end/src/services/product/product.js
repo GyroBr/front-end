@@ -20,7 +20,7 @@ const api = axios.create({
 
 export const registerProduct = async (token, formData) => {
   try {
-    const response = await axios.post(`${APIBASEURL}/register`, formData, {
+    const response = await api.post(`/products/register`, formData, {
       headers: {
         "Authorization": `Bearer ${token}`,
         "Content-Type": "multipart/form-data",
