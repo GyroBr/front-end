@@ -9,13 +9,15 @@ import { GoAlert } from "react-icons/go";
 const Card = ({
   id,
   name,
-  description,
+  barCode,
   price,
   image,
   onDelete,
   onEdit,
   category,
   warningQuantity,
+  volume,
+  expirationDate,
   quantity,
   expireDate,
 }) => {
@@ -109,10 +111,13 @@ const Card = ({
           productId={id}
           name={name}
           category={category}
-          description={description}
+          quantity={quantity}
+          barCode={barCode}
           warningQuantity={warningQuantity}
+          volume={volume}
+          expirationDate={expirationDate}
           price={price}
-          image={image}
+          // image={image}
           onEditSuccess={() => onEdit(id)} // Chama a função passada por prop
         />
       )}

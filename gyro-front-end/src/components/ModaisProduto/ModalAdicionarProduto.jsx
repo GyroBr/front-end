@@ -7,7 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 export default function ModalAdicionar({ isOpen, setModalOpen, onAddSuccess }) {
   const [product, setProduct] = useState({
     name: "",
-    description: "",
+    barCode: "",
     price: "",
     quantity: "",
     expirationDate: "",
@@ -58,7 +58,7 @@ export default function ModalAdicionar({ isOpen, setModalOpen, onAddSuccess }) {
         quantity: product.quantity,
         warningQuantity: product.warningQuantity,
         expiresAt: product.expirationDate,
-        barCode: product.description,
+        barCode: product.barCode,
       };
 
       formData.append(
@@ -187,9 +187,9 @@ export default function ModalAdicionar({ isOpen, setModalOpen, onAddSuccess }) {
             <div className={styles.inputWrapper}>
               <h6>Código de barras</h6>
               <input
-                name="description"
+                name="barCode"
                 className={styles.inputs_square}
-                value={product.description}
+                value={product.barCode}
                 onChange={handleInputChange}
               />
             </div>
