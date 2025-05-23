@@ -1,21 +1,23 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import styles from "./CardEstoque.module.css";
-import ModalEditarLote from "../ModaisLote/ModalEditarProduto";
-import ModalExcluirLote from "../ModaisLote/ModalExcluirProduto";
+import ModalEditarProduto from "../ModaisProduto/ModalEditarProduto";
+import ModalExcluirProduto from "../ModaisProduto/ModalExcluirProduto";
 import { BsCalendar4Event, BsFillPencilFill, BsFillTrashFill } from "react-icons/bs";
 import { GoAlert } from "react-icons/go";
 
 const Card = ({
   id,
   name,
-  description,
+  barCode,
   price,
   image,
   onDelete,
   onEdit,
   category,
   warningQuantity,
+  volume,
+  expirationDate,
   quantity,
   expireDate,
 }) => {
@@ -95,7 +97,7 @@ const Card = ({
         </div>
       </div>
       {isModalDeleteOpen && (
-        <ModalExcluirLote
+        <ModalExcluirProduto
           isOpen={isModalDeleteOpen}
           setModalOpen={closeModalDelete}
           productId={id}
@@ -103,16 +105,19 @@ const Card = ({
         />
       )}
       {isModalEditOpen && (
-        <ModalEditarLote
+        <ModalEditarProduto
           isOpen={isModalEditOpen}
           setModalOpen={closeModalEdit}
           productId={id}
           name={name}
           category={category}
-          description={description}
+          quantity={quantity}
+          barCode={barCode}
           warningQuantity={warningQuantity}
+          volume={volume}
+          expirationDate={expirationDate}
           price={price}
-          image={image}
+          // image={image}
           onEditSuccess={() => onEdit(id)} // Chama a função passada por prop
         />
       )}

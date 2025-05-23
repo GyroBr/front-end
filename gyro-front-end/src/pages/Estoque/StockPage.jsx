@@ -31,31 +31,32 @@ const EstoquePage = () => {
           return;
         }
   
-        const productsWithImages = await Promise.all(
-          products.map(async (product) => {
-            if (!product.productId) {
-              return null;
-            }
+        // const productsWithImages = await Promise.all(
+        //   products.map(async (product) => {
+        //     if (!product.productId) {
+        //       return null;
+        //     }
   
-            try {
-              const imageUrl = await getProductImage(token, product.productId);
-              console.log("Imagem carregada:", imageUrl);
-              return { ...product, image: imageUrl };
-            } catch (error) {
-              console.warn("Erro ao carregar imagem do produto:", product.productId, error);
-              return { ...product, image: "/path/to/default/image.png" };
-            }
-          })
-        );
+        //     try {
+        //       const imageUrl = await getProductImage(token, product.productId);
+        //       console.log("Imagem carregada:", imageUrl);
+        //       return { ...product, image: imageUrl };
+        //     } catch (error) {
+        //       console.warn("Erro ao carregar imagem do produto:", product.productId, error);
+        //       return { ...product, image: "/path/to/default/image.png" };
+        //     }
+        //   })
+        // );
   
         // Filtra produtos válidos
-        const validProducts = productsWithImages.filter((product) => product !== null);
+        // const validProducts = productsWithImages.filter((product) => product !== null);
+        const validProducts = products;
   
         // Evita atualização se o componente foi desmontado
         if (isMounted) {
           setRepositories(validProducts);
           setLoading(false);
-          setIsFullHeight(validProducts.length > 6);
+          setIsFullHeight(validProducts.length >= 3);
         }
       } catch (error) {
         console.error("Erro ao buscar produtos", error);
@@ -106,7 +107,7 @@ const EstoquePage = () => {
         </div>
         <div className={styles.container_btn}>
           <BtnAddProduct /> 
-          <BtnAddCombo />
+          {/* <BtnAddCombo /> */}
         </div>
         <div className={styles.container}>
           {loading ? (

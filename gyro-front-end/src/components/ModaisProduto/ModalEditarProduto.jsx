@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import styles from "./ModalEditarProduto.module.css";
 import { BsX } from "react-icons/bs";
-// import { editProduct } from "../../services/produto/ProdutoService";
+import { editProduct } from "../../services/product/product";
 import { toast } from "react-toastify";
 
 export default function ModalEditar({
@@ -10,22 +10,27 @@ export default function ModalEditar({
   setModalOpen,
   onEditSuccess,
   productId,
+  volume: initialVolume,
   productId: initializeId,
   name: initialName,
   price: initialPrice,
-  // image: initialImage,
+  quantity: initialQuantity,
+  warningQuantity: initialWarningQuantity,
   category: initialCategory,
-  description: initialDescription,
+  barCode: initialbarCode,
+  date: expirationDate,
 }) {
   // Estados locais para controlar os valores dos campos
   const [product, setProduct] = useState({
     productId: initializeId,
     name: initialName || "",
-    description: initialDescription || "",
+    volume: initialVolume || "",
+    barCode: initialbarCode || "",
     price: initialPrice || "",
-    // image: null, // Para novos arquivos
+    quantity: initialQuantity || "",
+    warningQuantity: initialWarningQuantity || "",
     category: initialCategory || "",
-    // existingImage: initialImage || "", // Para exibir a imagem atual
+    expirationDate: expirationDate || "",
   });
 
   const token = sessionStorage.getItem("token");
@@ -42,51 +47,80 @@ export default function ModalEditar({
   };
 
   // Função para confirmar a edição
+  // const handleConfirm = async () => {
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append("name", product.name);
+  //     formData.append("price", product.price);
+  //     formData.append("category", product.category);
+  //     formData.append("barCode", product.barCode);
+  //     formData.append("quantity", product.quantity);
+  //     formData.append("warningQuantity", product.warningQuantity);
+
+  //     const response = await editProduct(token, productId, formData);
+  //     console.log(response);
+
+  //     if (response.status === 200) {
+  //       setTimeout(() => {
+  //         window.location.reload();
+  //       }, 1000);
+  //       toast.success("Produto editado com sucesso!", {
+  //         autoClose: 700,
+  //       });
+  //       // onEditSuccess(); // Notifica o componente pai para atualizar a lista
+  //     }
+  //   } catch (error) {
+  //     console.error(
+  //       "Erro ao tentar editar o produto:",
+  //       error.response?.data || error.message
+  //     );
+  //     toast.error("Erro ao tentar editar o produto", {
+  //       autoClose: 700,
+  //     });
+  //   } finally {
+  //     setModalOpen(false);
+  //   }
+  // };
+
+  // if (!isOpen) {
+  //   return null;
+  // }
+
   const handleConfirm = async () => {
     try {
-      const formData = new FormData();
-      formData.append("name", product.name);
-      formData.append("price", product.price);
-      formData.append("category", product.category);
-      formData.append("description", product.description);
-      // if (product.image) {
-      //   formData.append("file", product.image);
-      // }
+      const productBody = {
+        name: product.name,
+        price: parseFloat(product.price),
+        category: product.category,
+        barCode: product.barCode,
+        volume: product.volume,
+        quantity: product.quantity,
+        warningQuantity: product.warningQuantity,
+        expirationDate: product.expirationDate,
+      };
 
-      const response = await editProduct(token, productId, formData);
-      console.log(response);
+      const response = await editProduct(token, productId, productBody);
 
       if (response.status === 200) {
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
-        toast.success("Produto editado com sucesso!", {
-          autoClose: 700,
-        });
-        // onEditSuccess(); // Notifica o componente pai para atualizar a lista
+        toast.success("Produto editado com sucesso!", { autoClose: 700 });
+        setTimeout(() => window.location.reload(), 1000);
       }
     } catch (error) {
       console.error(
         "Erro ao tentar editar o produto:",
         error.response?.data || error.message
       );
-      toast.error("Erro ao tentar editar o produto", {
-        autoClose: 700,
-      });
+      toast.error("Erro ao tentar editar o produto", { autoClose: 700 });
     } finally {
       setModalOpen(false);
     }
   };
 
-  if (!isOpen) {
-    return null;
-  }
-
   return (
     <div className={styles.background}>
       <div className={styles.modalContentStyle}>
         <div className={styles.titleWrapper}>
-          <h4 className={styles.title}>Adicione um Produto</h4>
+          <h4 className={styles.title}>Edite o Produto</h4>
           <button className={styles.btn_x} onClick={() => setModalOpen(false)}>
             <BsX />
           </button>
@@ -117,7 +151,6 @@ export default function ModalEditar({
               />
             </div>
           </div>
-
           {/* Quantidade e Aviso */}
           <div className={styles.inputGroup}>
             <div className={styles.inputWrapper}>
@@ -145,7 +178,7 @@ export default function ModalEditar({
           </div>
 
           {/* Categoria */}
-          <div className={styles.row}>
+          <div className={styles.inputGroup}>
             <div className={styles.inputWrapper}>
               <h6>Categoria</h6>
               <input
@@ -154,6 +187,30 @@ export default function ModalEditar({
                 placeholder="Digite a categoria"
                 name="category"
                 value={product.category}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className={styles.inputWrapper}>
+              <h6>Volume</h6>
+              <input
+                type="text"
+                name="volume"
+                value={product.volume}
+                className={styles.inputs_square}
+                onChange={handleInputChange}
+              />
+            </div>
+          </div>
+
+          {/* Código de barras */}
+          <div className={styles.row}>
+            <div className={styles.inputWrapper}>
+              <h6>Código de barras</h6>
+              <input
+                type="number"
+                name="barCode"
+                className={styles.inputs_square}
+                value={product.barCode}
                 onChange={handleInputChange}
               />
             </div>
@@ -172,57 +229,6 @@ export default function ModalEditar({
               />
             </div>
           </div>
-
-          {/* Código de barras */}
-          <div className={styles.row}>
-            <div className={styles.inputWrapper}>
-              <h6>Código de barras</h6>
-              <input
-                name="description"
-                className={styles.inputs_square}
-                value={product.description}
-                onChange={handleInputChange}
-              />
-            </div>
-          </div>
-
-          {/* Upload de Imagem com Preview e Botão de Remover */}
-          {/* <div className={styles.row}>
-            <div className={styles.inputWrapper}>
-              <h6>Adicionar imagem</h6>
-              {!previewUrl ? (
-                <input
-                  id="imageUpload"
-                  type="file"
-                  accept="image/*"
-                  className={styles.fileInput}
-                  name="image"
-                  onChange={handleInputChange}
-                />
-              ) : (
-                <div className={styles.previewWrapper}>
-                  <img
-                    src={previewUrl}
-                    alt="Pré-visualização"
-                    className={styles.previewImage}
-                  />
-                  <button
-                    type="button"
-                    className={styles.removeButton}
-                    onClick={() => {
-                      setProduct((prev) => ({ ...prev, image: null }));
-                      URL.revokeObjectURL(previewUrl);
-                      setPreviewUrl(null);
-                    }}
-                  >
-                    Remover imagem
-                  </button>
-                </div>
-              )}
-            </div>
-          </div> */}
-
-          {/* Botões */}
 
           <div className={styles.buttons}>
             <button
