@@ -21,10 +21,9 @@ const OrderPage = () => {
   const handleCashGivenChange = (amount) => setCashGiven(amount);
 
   useEffect(() => {
-    
     const fetchProducts = async () => {
       const fetchedProducts = await getProducts(token);
-console.log("Produtos recebidos:", fetchedProducts);
+      console.log("Produtos recebidos:", fetchedProducts);
 
       try {
         const fetchedProducts = await getProducts(token);
@@ -71,7 +70,7 @@ console.log("Produtos recebidos:", fetchedProducts);
   const handleCreateOrder = async () => {
     const orderData = {
       paymentMethod: paymentMethod,
-      amountOfMoneyGiven: paymentMethod === "MONEY" ? cashGiven : null,
+      amountOfMoneyGiven: paymentMethod === "CASH" ? cashGiven : null,
       orderProduct: Object.entries(cartItems).map(([id, { quantity }]) => ({
         productId: parseInt(id, 10),
         quantity,
