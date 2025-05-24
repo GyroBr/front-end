@@ -19,12 +19,15 @@ export default function ModalExcluir({ isOpen, setModalOpen, employeeId }) {
       } else {
         console.log(error);
         toast.error(error.response?.data || "Erro ao excluir funcionário", {
-          autoClose: 5000,
+          autoClose: 2000,
         });
       }
     } catch (error) {
       console.error("Erro ao tentar excluir o Funcionário:", error);
-      alert(error.message);
+
+      toast.error(error.response?.data || "Erro ao excluir funcionário", {
+        autoClose: 2000,
+      });
     } finally {
       setModalOpen(false);
     }

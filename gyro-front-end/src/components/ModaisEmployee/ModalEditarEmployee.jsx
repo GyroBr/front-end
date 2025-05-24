@@ -30,9 +30,9 @@ export default function ModalEditar({
     const { name, value, files } = e.target;
 
     if (name === "image" && files.length > 0) {
-      setemployee((prev) => ({ ...prev, image: files[0] }));
+      setEmployee((prev) => ({ ...prev, image: files[0] }));
     } else {
-      setemployee((prev) => ({ ...prev, [name]: value }));
+      setEmployee((prev) => ({ ...prev, [name]: value }));
     }
   };
 
@@ -44,7 +44,8 @@ export default function ModalEditar({
       formData.append("email", employee.email);
       formData.append("password", employee.password);
 
-      const response = await editemployee(token, employeeId, formData);
+
+      const response = await updateEmployee(token, employeeId, formData);
       console.log(response);
 
       if (response.status === 200) {

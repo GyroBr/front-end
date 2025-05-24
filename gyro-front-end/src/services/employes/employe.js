@@ -32,7 +32,7 @@ export const getEmployees = async (token) => {
   }
 };
 
-export const updateEmployee = async (token, body, id) => {
+export const updateEmployee = async (token, id, body) => {
   try {
     const response = await api.put(`/admin/update-employee/${id}`, body, {
       headers: { Authorization: `Bearer ${token}` },
