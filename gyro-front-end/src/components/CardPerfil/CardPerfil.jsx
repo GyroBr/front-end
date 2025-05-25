@@ -42,7 +42,7 @@ const CardPerfil = ({ id, nome, email, password, onDelete }) => {
   const handleCancelClick = () => {
     setIsEditing(false);
     console.log("to na segunda");
-    window.location.reload();
+    // window.location.reload();
   };
 
   const handleConfirmClick = async () => {

@@ -32,9 +32,9 @@ export const getEmployees = async (token) => {
   }
 };
 
-export const updateEmployee = async (token, body, id) => {
+export const updateEmployee = async (token, id, body) => {
   try {
-    const response = await api.put(`/admin/update-employee/${id}`, body, {
+    const response = await api.put(`/employees/update-employee/${id}`, body, {
       headers: { Authorization: `Bearer ${token}` },
     });
     return response;
@@ -46,7 +46,7 @@ export const updateEmployee = async (token, body, id) => {
 
 export const deleteEmployee = async (id, token) => {
   try {
-    const response = await api.delete(`/admin/delete-employee/${id}`, {
+    const response = await api.delete(`employees/delete-employee/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     return response;
