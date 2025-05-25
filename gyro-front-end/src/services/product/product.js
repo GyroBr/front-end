@@ -83,7 +83,7 @@ export const getAllCategories = async (token) => {
 
 export const deleteProduct = async (token, productId) => {
   try {
-    return await api.delete(`/products/${productId}`, {
+    return await api.delete(`/products/delete-product/${productId}`, {
       headers: { Authorization: `Bearer ${token}` }
     });
   } catch (error) {

@@ -14,7 +14,7 @@ export default function ModalExcluir({ isOpen, setModalOpen, employeeId }) {
       if (response.status === 204) {
         toast.success("Funcionário excluído com sucesso!", { autoClose: 700 });
         setTimeout(() => {
-          window.location.reload();
+          // window.location.reload();
         }, 1000);
       } else {
         console.log(error);
