@@ -17,7 +17,6 @@ const Card = ({
   category,
   warningQuantity,
   volume,
-  expirationDate,
   quantity,
   expireDate,
 }) => {
@@ -30,6 +29,28 @@ const Card = ({
   const openModalEdit = () => setIsModalEditOpen(true);
   const closeModalEdit = () => setIsModalEditOpen(false);
 
+  // Função para formatar a data no padrão brasileiro (dd/MM/yyyy)
+  const formatarDataBrasileira = (dataString) => {
+    if (!dataString) return "Sem data";
+    
+    try {
+      const data = new Date(dataString);
+      
+      // Corrige o fuso horário para não alterar o dia
+      const offset = data.getTimezoneOffset();
+      data.setMinutes(data.getMinutes() + offset);
+      
+      const dia = String(data.getDate()).padStart(2, '0');
+      const mes = String(data.getMonth() + 1).padStart(2, '0');
+      const ano = data.getFullYear();
+      
+      return `${dia}/${mes}/${ano}`;
+    } catch (error) {
+      console.error("Erro ao formatar data:", error);
+      return "Data inválida";
+    }
+  };
+
   // Função para determinar a cor do status
   const getStatusColor = () => {
     if (quantity < warningQuantity) {
@@ -40,8 +61,6 @@ const Card = ({
       return styles.green; // Cor verde
     }
   };
-
-  // console.log('imagem => ',image)
 
   return (
     <div className={styles.card_estoque}>
@@ -79,7 +98,7 @@ const Card = ({
             <span className={styles.text}>Validade</span>
             <div className={styles.box_intern}>
               <BsCalendar4Event />
-              <span className={styles.date}>{expireDate}</span>
+              <span className={styles.date}>{formatarDataBrasileira(expireDate)}</span>
             </div>
           </div>
 
@@ -101,7 +120,7 @@ const Card = ({
           isOpen={isModalDeleteOpen}
           setModalOpen={closeModalDelete}
           productId={id}
-          onDeleteSuccess={() => onDelete(id)} // Chama a função passada por prop
+          onDeleteSuccess={() => onDelete(id)}
         />
       )}
       {isModalEditOpen && (
@@ -115,10 +134,9 @@ const Card = ({
           barCode={barCode}
           warningQuantity={warningQuantity}
           volume={volume}
-          expirationDate={expirationDate}
+          expireDate={expireDate}
           price={price}
-          // image={image}
-          onEditSuccess={() => onEdit(id)} // Chama a função passada por prop
+          onEditSuccess={() => onEdit(id)}
         />
       )}
     </div>

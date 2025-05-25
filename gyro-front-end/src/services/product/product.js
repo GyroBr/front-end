@@ -61,7 +61,7 @@ export const getProductImage = async (token, productId) => {
 
 export const editProduct = async (token, productId, productBody) => {
   try {
-    return await api.put(`/products/${productId}`, productBody, {
+    return await api.put(`/products/update-product/${productId}`, productBody, {
       headers: { Authorization: `Bearer ${token}` }
     });
   } catch (error) {
