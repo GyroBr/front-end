@@ -31,25 +31,7 @@ const EstoquePage = () => {
           return;
         }
   
-        // const productsWithImages = await Promise.all(
-        //   products.map(async (product) => {
-        //     if (!product.productId) {
-        //       return null;
-        //     }
   
-        //     try {
-        //       const imageUrl = await getProductImage(token, product.productId);
-        //       console.log("Imagem carregada:", imageUrl);
-        //       return { ...product, image: imageUrl };
-        //     } catch (error) {
-        //       console.warn("Erro ao carregar imagem do produto:", product.productId, error);
-        //       return { ...product, image: "/path/to/default/image.png" };
-        //     }
-        //   })
-        // );
-  
-        // Filtra produtos válidos
-        // const validProducts = productsWithImages.filter((product) => product !== null);
         const validProducts = products;
   
         // Evita atualização se o componente foi desmontado
@@ -121,7 +103,8 @@ const EstoquePage = () => {
                   key={`${repo.productId}-${repo.name}`}
                   id={repo.productId}
                   name={repo.name}
-                  description={repo.description}
+                  barCode={repo.barCode}
+                  volume={repo.volume}
                   price={repo.price}
                   image={repo.image}
                   warningQuantity={repo.warningQuantity}

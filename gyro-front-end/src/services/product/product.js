@@ -61,7 +61,7 @@ export const getProductImage = async (token, productId) => {
 
 export const editProduct = async (token, productId, productBody) => {
   try {
-    return await api.put(`/products/${productId}`, productBody, {
+    return await api.put(`/products/update-product/${productId}`, productBody, {
       headers: { Authorization: `Bearer ${token}` }
     });
   } catch (error) {
@@ -83,7 +83,7 @@ export const getAllCategories = async (token) => {
 
 export const deleteProduct = async (token, productId) => {
   try {
-    return await api.delete(`/products/${productId}`, {
+    return await api.delete(`/products/delete-product/${productId}`, {
       headers: { Authorization: `Bearer ${token}` }
     });
   } catch (error) {

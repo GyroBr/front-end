@@ -18,7 +18,7 @@ export default function ModalEditar({
   warningQuantity: initialWarningQuantity,
   category: initialCategory,
   barCode: initialbarCode,
-  date: expirationDate,
+  expireDate: initialExpiresAt,
 }) {
   // Estados locais para controlar os valores dos campos
   const [product, setProduct] = useState({
@@ -30,7 +30,7 @@ export default function ModalEditar({
     quantity: initialQuantity || "",
     warningQuantity: initialWarningQuantity || "",
     category: initialCategory || "",
-    expirationDate: expirationDate || "",
+    expireDate: initialExpiresAt || "",
   });
 
   const token = sessionStorage.getItem("token");
@@ -46,45 +46,6 @@ export default function ModalEditar({
     }
   };
 
-  // Função para confirmar a edição
-  // const handleConfirm = async () => {
-  //   try {
-  //     const formData = new FormData();
-  //     formData.append("name", product.name);
-  //     formData.append("price", product.price);
-  //     formData.append("category", product.category);
-  //     formData.append("barCode", product.barCode);
-  //     formData.append("quantity", product.quantity);
-  //     formData.append("warningQuantity", product.warningQuantity);
-
-  //     const response = await editProduct(token, productId, formData);
-  //     console.log(response);
-
-  //     if (response.status === 200) {
-  //       setTimeout(() => {
-  //         window.location.reload();
-  //       }, 1000);
-  //       toast.success("Produto editado com sucesso!", {
-  //         autoClose: 700,
-  //       });
-  //       // onEditSuccess(); // Notifica o componente pai para atualizar a lista
-  //     }
-  //   } catch (error) {
-  //     console.error(
-  //       "Erro ao tentar editar o produto:",
-  //       error.response?.data || error.message
-  //     );
-  //     toast.error("Erro ao tentar editar o produto", {
-  //       autoClose: 700,
-  //     });
-  //   } finally {
-  //     setModalOpen(false);
-  //   }
-  // };
-
-  // if (!isOpen) {
-  //   return null;
-  // }
 
   const handleConfirm = async () => {
     try {
@@ -96,8 +57,9 @@ export default function ModalEditar({
         volume: product.volume,
         quantity: product.quantity,
         warningQuantity: product.warningQuantity,
-        expirationDate: product.expirationDate,
+        expiresAt: product.expireDate,
       };
+      console.log(productBody);
 
       const response = await editProduct(token, productId, productBody);
 
@@ -222,8 +184,8 @@ export default function ModalEditar({
               <h6>Data de Validade</h6>
               <input
                 type="date"
-                name="expirationDate"
-                value={product.expirationDate}
+                name="expireDate"
+                value={product.expireDate}
                 className={styles.inputs_square}
                 onChange={handleInputChange}
               />
