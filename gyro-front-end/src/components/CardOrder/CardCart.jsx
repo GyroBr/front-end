@@ -10,7 +10,7 @@ const CardCart = ({ cartItems, onCreateOrder, total, onPaymentMethodChange, onCa
     const value = e.target.value;
     setPaymentMethod(value);
     onPaymentMethodChange(value); // Comunica com o componente pai
-    if (value !== "MONEY") {
+    if (value !== "CASH") {
       setCashGiven("");
       onCashGivenChange(0); // Reseta o valor caso não seja dinheiro
     }
@@ -24,7 +24,7 @@ const CardCart = ({ cartItems, onCreateOrder, total, onPaymentMethodChange, onCa
   };
 
   const calculateChange = () => {
-    if (!cashGiven || paymentMethod !== "MONEY") return 0;
+    if (!cashGiven || paymentMethod !== "CASH") return 0;
     return Math.max(0, parseFloat(cashGiven) - parseFloat(total)).toFixed(2);
   };
 
@@ -65,11 +65,11 @@ const CardCart = ({ cartItems, onCreateOrder, total, onPaymentMethodChange, onCa
                 <option value="">Selecione</option>
                 <option value="CREDIT_CARD">Cartão de Crédito</option>
                 <option value="DEBIT_CARD">Cartão de Débito</option>
-                <option value="MONEY">Dinheiro</option>
+                <option value="CASH">Dinheiro</option>
                 <option value="PIX">PIX</option>
               </select>
             </div>
-            {paymentMethod === "MONEY" && (
+            {paymentMethod === "CASH" && (
               <div className={styles.cash_input_container}>
                 <label className={styles.cash_label}>
                   Valor dado:
