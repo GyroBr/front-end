@@ -1,118 +1,98 @@
 import React, { useEffect, useState } from "react";
-// import axios from 'axios';
 import Sidebar from "../../components/SideBar/Sidebar";
-// import CardFunc from "../../components/CardFunc/CardFunc";
 import styles from "../Profile/ProfileStyle.module.css";
-import { BsPlusLg, BsTrash3, BsPencil } from "react-icons/bs";
+import { BsPencil } from "react-icons/bs";
 import { toast } from 'react-toastify';
-// import jwt from 'jsonwebtoken';
-// import api from '../../api';
-import { getEnterpriseById } from "../../services/enterprise/enterprise";
-import { TbElevator } from "react-icons/tb";
-import CardPerfil from "../../components/CardPerfil/CardPerfil";
+import { getEnterpriseById, updateEnterprise } from "../../services/enterprise/enterprise";
 import CardAddEmployee from "../../components/CardPerfil/CardAddEmployee";
-import { registerEmployee, getEmployees } from "../../services/employes/employe";
 
 const EmployeePage = () => {
-
-    const [employees, setEmployees] = useState([]);
+    // const [employees, setEmployees] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
     const [isAddingEmployee, setIsAddingEmployee] = useState(false);
     const [isEditable, setIsEditable] = useState(true);
     const [enterpriseData, setEnterpriseData] = useState({
         id: "",
-        nome: "",
-        telefone: "",
+        name: "",
+        phoneNumber: "",
         email: "",
         cnpj: "",
         sector: "",
         password: "",
-        cep: "",
-        rua: "",
-        numero: "",
-        bairro: "",
-        cidade: ""
+        address: {
+            postalCode: "",
+            street: "",
+            number: "",
+            neighborhood: "",
+            city: "",
+            federativeUnity: "SP",
+            state: "São Paulo"
+        }
     });
 
-    //carrega assim que a pagina carrega
+    // Carrega os dados quando a página é montada
     useEffect(() => {
         const fetchData = async () => {
             const token = sessionStorage.getItem('token');
             if (token) {
-                // Faça a requisição GET aqui
                 try {
                     const data = await getEnterpriseById(token);
-                    // console.log(data); // Processar os dados conforme necessário
                     setEnterpriseData({
                         id: data.enterpriseId,
-                        nome: data.name,
-                        telefone: data.phoneNumber,
+                        name: data.name,
+                        phoneNumber: data.phoneNumber,
                         email: data.email,
                         cnpj: data.cnpj,
                         sector: data.sector,
                         password: data.password,
-                        cep: data.address.postalCode,
-                        rua: data.address.street,
-                        numero: data.address.number,
-                        bairro: data.address.neighborhood,
-                        cidade: data.address.city
+                        address: {
+                            postalCode: data.address.postalCode,
+                            street: data.address.street,
+                            number: data.address.number,
+                            neighborhood: data.address.neighborhood,
+                            city: data.address.city,
+                            federativeUnity: data.address.federativeUnity || "SP",
+                            state: data.address.state || "São Paulo"
+                        }
                     });
                 } catch (error) {
                     console.error('Erro ao buscar dados:', error);
                 }
             }
         };
-
         fetchData();
     }, []);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const token = sessionStorage.getItem('token');
-            if (token) {
-                // Faça a requisição GET aqui
-                try {
-                    const data = await getEmployees(token);
-                    // console.log(data, 'dados dos funcionarios'); // Processar os dados conforme necessário
-                    
-                    setEmployees(data.data.employees);
-
-                } catch (error) {
-                    console.error('Erro ao buscar dados:', error);
-                }
-            }
-        };
-
-        fetchData();
-    }, []);
-
-    useEffect(() => {
-        // console.log("to no employee", employees); // Verifique o estado employees após a definição
-        
-    }, [employees]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setEnterpriseData((prevData) => ({
-            ...prevData,
-            [name]: value
-        }));
+        
+        // Verifica se o campo pertence ao endereço
+        if (name.includes('address.')) {
+            const addressField = name.split('.')[1];
+            setEnterpriseData(prev => ({
+                ...prev,
+                address: {
+                    ...prev.address,
+                    [addressField]: value
+                }
+            }));
+        } else {
+            setEnterpriseData(prev => ({
+                ...prev,
+                [name]: value
+            }));
+        }
     };
 
     const handleEditClick = () => {
         setIsEditing(true);
-        setIsEditable(false); // Esta linha faz a alteração do readOnly(somente leitura) false - pode editar true- só pode ler
-        console.log("to na primeira", isEditable);
+        setIsEditable(false);
     };
 
     const handleCancelClick = () => {
         setIsEditing(false);
-        console.log("to na segunda");
+        setIsEditable(true);
         window.location.reload();
-    };
-
-    const handleOpenCardEmployee = () => {
-        setIsAddingEmployee(true);
     };
 
     const handleCloseCardEmployee = () => {
@@ -120,35 +100,44 @@ const EmployeePage = () => {
     };
 
     const handleConfirmClick = async () => {
-        // Adicione a lógica de confirmação aqui
-        const dataToSend = {
-            name: enterpriseData.nome,
-            phoneNumber: enterpriseData.telefone,
-            email: enterpriseData.email,
-            password: enterpriseData.password,
-        };
-        console.error(dataToSend)
         try {
-            const token = sessionStorage.getItem('token');  // Pega o token do sessionStorage
+            const token = sessionStorage.getItem('token');
+            
+            // Preparar os dados no formato esperado pelo backend
+            const empresaData = {
+                name: enterpriseData.name,
+                phoneNumber: enterpriseData.phoneNumber,
+                email: enterpriseData.email,
+                password: enterpriseData.password,
+                cnpj: enterpriseData.cnpj,
+                sector: enterpriseData.sector,
+                address: {
+                    postalCode: enterpriseData.address.postalCode,
+                    street: enterpriseData.address.street,
+                    number: enterpriseData.address.number,
+                    neighborhood: enterpriseData.address.neighborhood,
+                    city: enterpriseData.address.city,
+                    federativeUnity: enterpriseData.address.federativeUnity,
+                    state: enterpriseData.address.state
+                }
+            };
 
-            const response = await api.put(`/admin/update-enterprise/${enterpriseData.id}`, dataToSend, {
-                headers: {
-                    "content-type": "application/json",
-                    "Authorization": token
-                },
-            });
+            console.log('Dados sendo enviados:', empresaData);
 
-            toast.success('Perfil atualizado com sucesso!', {
-                autoClose: 1700,
-            });
-
+            const response = await updateEnterprise(empresaData, token);
+            
+            if (response) {
+                toast.success('Perfil atualizado com sucesso!', {
+                    autoClose: 1700,
+                });
+                setIsEditing(false);
+                setIsEditable(true);
+            }
         } catch (error) {
-            // setIsEditing(false);
-
-            toast.error('Erro ao atualizar perfil!', {
-                autoClose: 1700,
+            console.error('Erro ao atualizar perfil:', error.response?.data || error.message);
+            toast.error('Erro ao atualizar perfil! Verifique todos os campos obrigatórios.', {
+                autoClose: 2500,
             });
-            console.log("to na terceira");
         }
     };
 
@@ -165,7 +154,6 @@ const EmployeePage = () => {
                 <div className={styles.card_conteudo}>
                     <div className={styles.container_perfil}>
                         <button className={styles.card_btn} onClick={handleEditClick}>
-                            {/* Editar Perfil */}
                             <BsPencil className={styles.icon_pencil} />
                         </button>
 
@@ -175,8 +163,8 @@ const EmployeePage = () => {
                                     <span>Nome</span>
                                     <input
                                         type="text"
-                                        name="nome"
-                                        value={enterpriseData.nome}
+                                        name="name"
+                                        value={enterpriseData.name}
                                         onChange={handleInputChange}
                                         placeholder="Digite o nome"
                                         className={styles.input}
@@ -187,8 +175,8 @@ const EmployeePage = () => {
                                     <span>Telefone</span>
                                     <input
                                         type="text"
-                                        name="telefone"
-                                        value={enterpriseData.telefone}
+                                        name="phoneNumber"
+                                        value={enterpriseData.phoneNumber}
                                         onChange={handleInputChange}
                                         placeholder="Digite o telefone"
                                         className={styles.input}
@@ -221,7 +209,6 @@ const EmployeePage = () => {
                                         className={styles.input}
                                         readOnly={true}
                                         onFocus={(e) => e.target.blur()}
-
                                     />
                                 </div>
                             </div>
@@ -259,8 +246,8 @@ const EmployeePage = () => {
                                     <span>CEP</span>
                                     <input
                                         type="text"
-                                        name="cep"
-                                        value={enterpriseData.cep}
+                                        name="address.postalCode"
+                                        value={enterpriseData.address.postalCode}
                                         onChange={handleInputChange}
                                         placeholder="Digite o cep"
                                         className={styles.input}
@@ -272,8 +259,8 @@ const EmployeePage = () => {
                                     <span>Rua</span>
                                     <input
                                         type="text"
-                                        name="rua"
-                                        value={enterpriseData.rua}
+                                        name="address.street"
+                                        value={enterpriseData.address.street}
                                         onChange={handleInputChange}
                                         placeholder="Digite a Rua"
                                         className={styles.input}
@@ -288,8 +275,8 @@ const EmployeePage = () => {
                                     <span>Número</span>
                                     <input
                                         type="text"
-                                        name="numero"
-                                        value={enterpriseData.numero}
+                                        name="address.number"
+                                        value={enterpriseData.address.number}
                                         onChange={handleInputChange}
                                         placeholder="Digite o número"
                                         className={styles.input}
@@ -301,8 +288,8 @@ const EmployeePage = () => {
                                     <span>Bairro</span>
                                     <input
                                         type="text"
-                                        name="bairro"
-                                        value={enterpriseData.bairro}
+                                        name="address.neighborhood"
+                                        value={enterpriseData.address.neighborhood}
                                         onChange={handleInputChange}
                                         placeholder="Digite o bairro"
                                         className={styles.input}
@@ -317,8 +304,8 @@ const EmployeePage = () => {
                                     <span>Cidade</span>
                                     <input
                                         type="text"
-                                        name="cidade"
-                                        value={enterpriseData.cidade}
+                                        name="address.city"
+                                        value={enterpriseData.address.city}
                                         onChange={handleInputChange}
                                         placeholder="Digite a cidade"
                                         className={styles.input}
@@ -326,11 +313,21 @@ const EmployeePage = () => {
                                         onFocus={(e) => e.target.blur()}
                                     />
                                 </div>
-                                {/* <div className={styles.box}>
-                                    <span>Estado</span>
-                                    <input type="text" placeholder="Digite o estado" className={styles.input} />
-                                </div> */}
-                                {isEditing && (
+                                <div className={styles.box}>
+                                    <span>Estado (UF)</span>
+                                    <input
+                                        type="text"
+                                        name="address.federativeUnity"
+                                        value={enterpriseData.address.federativeUnity}
+                                        onChange={handleInputChange}
+                                        placeholder="Digite a UF"
+                                        className={styles.input}
+                                        readOnly={isEditable}
+                                    />
+                                </div>
+                            </div>
+
+                            {isEditing && (
                                 <div className={styles.button_group}>
                                     <button className={styles.btn_cancel} onClick={handleCancelClick}>
                                         Cancelar
@@ -340,10 +337,6 @@ const EmployeePage = () => {
                                     </button>
                                 </div>
                             )}
-                            </div>
-
-                            
-
                         </div>
                     </div>
                 </div>
@@ -355,4 +348,4 @@ const EmployeePage = () => {
     );
 };
 
-export default EmployeePage
+export default EmployeePage;
