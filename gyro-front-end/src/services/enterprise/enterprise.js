@@ -44,3 +44,17 @@ export const isAdmin = async (token) => {
     throw error;
   }
 };
+
+export const updateEnterprise = async (empresa, token) => {
+  try {
+    const response = await api.put("/companies/update-company", empresa, {
+      headers: {
+        Authorization: token
+      }
+    });
+    return response;
+  } catch (error) {
+    console.error("Erro ao tentar atualizar a empresa:", error.response?.data || error.message);
+    throw error;
+  }
+};
