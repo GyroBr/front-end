@@ -37,7 +37,7 @@ const TopProducts = () => {
 
     if (loading) return <div>Carregando...</div>;
     if (error) return <div>{error}</div>;
-    if (!bestSales || bestSales.length === 0) return <div>Nenhum produto vendido ainda</div>;
+    // if (!bestSales || bestSales.length === 0) return <div>Nenhum produto vendido ainda</div>;
 
     return (
         <div className="top-products">
