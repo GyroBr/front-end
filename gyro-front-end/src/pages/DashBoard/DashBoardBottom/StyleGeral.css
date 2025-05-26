@@ -70,7 +70,7 @@
 }
 
 .pie-chart {
-    width: 20px;
+    width: 200px;
     height: 220px;
     flex-shrink: 0;
     display: flex;
@@ -84,4 +84,83 @@
     height: 70%; /* 30% menor que 80% */
     border-radius: 50%;
     background: conic-gradient(#ffc107 0% 40%, #ff9800 40% 70%, #ff5722 70% 100%);
+}
+
+/* Adicione estas regras ao seu arquivo StyleGeral.css */
+
+.top-products {
+    font-size: 5px;
+    background-color: #131313;
+    padding: 14px; 
+    border-radius: 7px; 
+    width: 560px;
+    height: 225px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.div_lista_top_products {
+    padding: 3px;
+    display: flex;
+    flex-direction: column;
+    width: 266px;
+    height: 100%;
+    direction: rtl; /* Isso inverte a direção do texto e da scrollbar */
+}
+
+.div_lista_top_products h3 {
+    font-size: 0.84em;
+    margin-bottom: 7px;
+    flex-shrink: 0;
+    direction: ltr; /* Mantém o título na direção normal */
+    text-align: left; /* Alinha o título à esquerda */
+}
+
+.div_lista_top_products ul {
+    font-size: 15px;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    overflow-y: auto;
+    max-height: calc(100% - 30px);
+    scrollbar-width: thin;
+    direction: ltr; /* Mantém o conteúdo da lista na direção normal */
+    padding-left: 10px; /* Espaço para a scrollbar */
+}
+
+/* Estilização da scrollbar à esquerda - Chrome/Edge/Safari */
+.div_lista_top_products ul::-webkit-scrollbar {
+    width: 6px;
+}
+
+.div_lista_top_products ul::-webkit-scrollbar-track {
+    background: transparent; /* Remove o fundo */
+}
+
+.div_lista_top_products ul::-webkit-scrollbar-thumb {
+    background: #FFA34E; /* Cor laranja especificada */
+    border-radius: 3px;
+    border: 1px solid transparent;
+    background-clip: content-box;
+}
+
+.div_lista_top_products ul::-webkit-scrollbar-thumb:hover {
+    background: #FFA34E; /* Mantém a mesma cor no hover */
+    opacity: 0.8;
+}
+
+/* Estilização para Firefox */
+.div_lista_top_products ul {
+    scrollbar-color: #FFA34E transparent; /* Thumb e track */
+    scrollbar-width: thin;
+}
+
+.div_lista_top_products li {
+    font-size: 15px;
+    margin-bottom: 3.5px;
+    padding: 2px 0;
+    border-bottom: 1px solid #2a2a2a;
+    text-align: left; /* Garante que o texto fique alinhado à esquerda */
 }
