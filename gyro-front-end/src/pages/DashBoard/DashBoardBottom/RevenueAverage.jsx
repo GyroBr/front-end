@@ -28,15 +28,14 @@ const RevenueAverage = () => {
 
         const totalValueOfSales = orders.totalValueOfSales;
         const total = totalValueOfSales ? totalValueOfSales : 0;
+        const totalMonth = total / 12;
+        const totalDay = total / 30;
         // console.log('totalValueOfSales => ', totalValueOfSales);
         
         // console.log('orders => ', orders.totalValueOfSales);
         
         // const total = orders.totalValueOfSales;
 
-        var dataAtual = new Date();
-        var dia = total / dataAtual.getDate();
-    
 
     return (
         <div className="revenue-average">
@@ -44,11 +43,11 @@ const RevenueAverage = () => {
             <div className="revenue-values">
                 <div className="revenue-item">
                     <p>Mensal</p>
-                    <span>R$ {total.toFixed(2)}</span>
+                    <span>R$ {totalMonth.toFixed(2)}</span>
                 </div>
                 <div className="revenue-item">
                     <p>Diária</p>
-                    <span>R$ {dia.toFixed(2)}</span>
+                    <span>R$ {totalDay.toFixed(2)}</span>
                 </div>
             </div>
         </div>
