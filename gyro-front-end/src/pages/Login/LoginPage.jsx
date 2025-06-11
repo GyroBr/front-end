@@ -26,7 +26,7 @@ const LoginComponent = () => {
             autoClose: 700,
           });
           console.log(response)
-          navigate('/stock');
+          navigate('/profile');
         }).catch((error) => {
           const errorMessages = error.response.data;
   

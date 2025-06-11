@@ -9,13 +9,13 @@ const BarChart = () => {
 
     const [orders, setOrders] = useState([]);
     const [data, setData] = useState([
-        { day: 'Segunda', value: 10 },
-        { day: 'Terça', value: 6 },
-        { day: 'Quarta', value: 4 },
-        { day: 'Quinta', value: 2 },
-        { day: 'Sexta', value: 3 },
-        { day: 'Sábado', value: 1 },
-        { day: 'Domingo', value: 1 }
+        { day: 'Segunda', value: 0 },
+        { day: 'Terça', value: 0 },
+        { day: 'Quarta', value: 20 },
+        { day: 'Quinta', value: 0 },
+        { day: 'Sexta', value: 0 },
+        { day: 'Sábado', value: 0 },
+        { day: 'Domingo', value: 0 }
     ]);
 
     useEffect(() => {
