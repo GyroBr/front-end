@@ -106,29 +106,47 @@ const HomeComponent = () => {
       </section>
 
       <section className={styles.banner7} id="sobre">
-      <div className={styles.banner_content}>
-                        <div className={styles.div_Title}>
-                            <h1>Nossa Filosofia <b className={styles.point}> .</b></h1>
-                            <p>Descubra os pilares que sustentam nossa empresa, que orientam nossas ações e nosso compromisso com o sucesso dos nossos clientes.</p>
-                        </div>
-                        <div className={styles.div_SubText}>
-                            <div className={styles.card}>
-                                <img className={styles.icons} src={missionIcon} alt="Mission" />
-                                <h1>Missão</h1>
-                                <p>Criar um sistema inteligente que simplifique a gestão de comércios, possibilitando nossos clientes a focarem no que fazem de melhor: criar experiências excepcionais para seus consumidores.</p>
-                            </div>
-                            <div className={styles.card}>
-                                <img className={styles.icons} src={visionIcon} alt="Vision" />
-                                <h1>Visão</h1>
-                                <p>Ser referência nacional em solução tecnológica para o setor de Alimentos e Bebidas, revolucionando a gestão e promovendo o sucesso dos nossos clientes.</p>
-                            </div>
-                            <div className={styles.card}>
-                                <img className={styles.icons} src={valueIcon} alt="Value" />
-                                <h1>Valor</h1>
-                                <p>Facilitar a gestão e crescimento das adegas através de soluções inteligentes e integradas, oferecendo controle completo e eficiente sobre pedidos, estoque, funcionários e faturamento.</p>
-                            </div>
-                        </div>
-                    </div>
+        <div className={styles.banner_content}>
+          <div className={styles.div_Title}>
+            <h1>
+              Nossa Filosofia <b className={styles.point}> .</b>
+            </h1>
+            <p>
+              Descubra os pilares que sustentam nossa empresa, que orientam
+              nossas ações e nosso compromisso com o sucesso dos nossos
+              clientes.
+            </p>
+          </div>
+          <div className={styles.div_SubText}>
+            <div className={styles.card}>
+              <img className={styles.icons} src={missionIcon} alt="Mission" />
+              <h1>Missão</h1>
+              <p>
+                Criar um sistema inteligente que simplifique a gestão de
+                comércios, possibilitando nossos clientes a focarem no que fazem
+                de melhor: criar experiências excepcionais para seus
+                consumidores.
+              </p>
+            </div>
+            <div className={styles.card}>
+              <img className={styles.icons} src={visionIcon} alt="Vision" />
+              <h1>Visão</h1>
+              <p>
+                Ser referência nacional em solução tecnológica para o setor de
+                Alimentos e Bebidas, revolucionando a gestão e promovendo o
+                sucesso dos nossos clientes.
+              </p>
+            </div>
+            <div className={styles.card}>
+              <img className={styles.icons} src={valueIcon} alt="Value" />
+              <h1>Valores</h1>
+              <p>
+                Nossos valores são os princípios que orientam nossas decisões,
+                relações e cultura: Inovação; Comprometimento; Excelência; Transparência; Colaboração
+              </p>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section className={styles.banner8} id="contato">
