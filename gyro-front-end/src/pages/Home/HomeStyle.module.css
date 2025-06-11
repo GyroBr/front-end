@@ -523,6 +523,7 @@ footer .div1 ul {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  padding: 0;
   font-size: 0.8rem;
   text-decoration: none;
   list-style: none;
