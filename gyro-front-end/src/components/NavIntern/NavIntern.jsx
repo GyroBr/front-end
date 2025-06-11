@@ -5,6 +5,7 @@ import { FaFilterCircleXmark } from "react-icons/fa6";
 
 const NavIntern = ({ onCategorySelect }) => {
   const [categories, setCategories] = useState([]);
+  const [activeFilter, setActiveFilter] = useState(null);
   const menuRef = useRef(null);
 
   const token = sessionStorage.getItem("token");
@@ -24,48 +25,75 @@ const NavIntern = ({ onCategorySelect }) => {
   }, [token]);
 
   useEffect(() => {
-    const menuItem = menuRef.current?.querySelectorAll(`.${styles.menu_top} ul li`);
+    const menuItems = menuRef.current?.querySelectorAll(`.${styles.menu_top} ul li`);
 
     function selectLink(event) {
-      if (menuItem) {
-        menuItem.forEach((item) => item.classList.remove(styles.ativo));
+      if (menuItems) {
+        menuItems.forEach((item) => item.classList.remove(styles.ativo));
         event.currentTarget.classList.add(styles.ativo);
       }
     }
 
-    if (menuItem) {
-      menuItem.forEach((item) => item.addEventListener("click", selectLink));
+    if (menuItems) {
+      menuItems.forEach((item) => item.addEventListener("click", selectLink));
     }
 
     return () => {
-      if (menuItem) {
-        menuItem.forEach((item) => item.removeEventListener("click", selectLink));
+      if (menuItems) {
+        menuItems.forEach((item) => item.removeEventListener("click", selectLink));
       }
     };
   }, [categories]);
 
-  // Define a função reloadPage para recarregar a página
-  const reloadPage = () => {
-    window.location.reload();
+  const handleClearFilter = () => {
+    // Limpa o filtro ativo
+    setActiveFilter(null);
+    
+    // Remove a classe ativo de todos os itens
+    const menuItems = menuRef.current?.querySelectorAll(`.${styles.menu_top} ul li`);
+    if (menuItems) {
+      menuItems.forEach((item) => item.classList.remove(styles.ativo));
+    }
+    
+    // Notifica o componente pai que o filtro foi limpo
+    onCategorySelect(null);
+  };
+
+  const handleCategoryClick = (category) => {
+    setActiveFilter(category);
+    onCategorySelect(category);
   };
 
   return (
     <nav className={styles.menu_top} ref={menuRef}>
       <ul>
         {categories.length > 0 ? (
-          categories.map((category, index) => (
-            <li key={index} className={styles.item_menu}>
-              <a
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  onCategorySelect(category);
-                }}
-              >
-                <span className={styles.txt_link}>{category}</span>
+          <>
+            {/* <li 
+              className={`${styles.item_menu} ${activeFilter === null ? styles.ativo : ''}`}
+              onClick={() => handleClearFilter()}
+            >
+              <a href="#" onClick={(e) => e.preventDefault()}>
+                <span className={styles.txt_link}>Todas</span>
               </a>
-            </li>
-          ))
+            </li> */}
+            {categories.map((category, index) => (
+              <li 
+                key={index} 
+                className={`${styles.item_menu} ${activeFilter === category ? styles.ativo : ''}`}
+              >
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleCategoryClick(category);
+                  }}
+                >
+                  <span className={styles.txt_link}>{category}</span>
+                </a>
+              </li>
+            ))}
+          </>
         ) : (
           <li className={styles.item_menu}>
             <a href="#">
@@ -73,12 +101,12 @@ const NavIntern = ({ onCategorySelect }) => {
             </a>
           </li>
         )}
-        <li>
-        </li>
       </ul>
-          <button className={styles.btn_add} onClick={reloadPage}>
-            Limpar filtro <FaFilterCircleXmark className={styles.icon} />
-          </button>
+      {activeFilter && (
+        <button className={styles.btn_add} onClick={handleClearFilter}>
+          Limpar filtro <FaFilterCircleXmark className={styles.icon} />
+        </button>
+      )}
     </nav>
   );
 };
