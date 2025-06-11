@@ -7,6 +7,7 @@ export default defineConfig({
     host: true,
     port: 5173,
     strictPort: true,
-    allowedHosts: ['gyrobr.com', 'www.gyrobr.com'],
+    // allowedHosts: ['gyrobr.com', 'www.gyrobr.com'],
+    allowedHosts: ['http://34.238.47.86'],
   }
 })

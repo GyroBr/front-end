@@ -6,69 +6,56 @@ import BtnAddCombo from "../../components/Button/BtnAddCombo";
 import CardEstoque from "../../components/CardEstoque/CardEstoque";
 import CardShopList from "../../components/CardEstoque/CardShopList";
 import styles from "./StockStyle.module.css";
-import {
-  // getProductImage,
-  getProducts,
-} from "../../services/product/product";
-
-const token = sessionStorage.getItem("token");
+import { getProducts } from "../../services/product/product";
 
 const EstoquePage = () => {
   const [repositories, setRepositories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isFullHeight, setIsFullHeight] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [initialLoadComplete, setInitialLoadComplete] = useState(false);
   
   useEffect(() => {
-    let isMounted = true; // Variável para evitar atualizações após desmontagem
-  
+    let isMounted = true;
+    const token = sessionStorage.getItem("token");
+
     const fetchProducts = async () => {
       try {
+        setLoading(true);
         const products = await getProducts(token);
   
         if (!Array.isArray(products)) {
-          setLoading(false);
-          return;
+          throw new Error("Formato de dados inválido recebido da API");
         }
-  
-  
-        const validProducts = products;
-  
-        // Evita atualização se o componente foi desmontado
+
         if (isMounted) {
-          setRepositories(validProducts);
+          setRepositories(products);
+          setIsFullHeight(products.length >= 3);
           setLoading(false);
-          setIsFullHeight(validProducts.length >= 3);
+          setInitialLoadComplete(true);
         }
       } catch (error) {
         console.error("Erro ao buscar produtos", error);
-        if (isMounted) setLoading(false);
+        if (isMounted) {
+          setLoading(false);
+          setInitialLoadComplete(true);
+        }
       }
     };
   
     fetchProducts();
   
     return () => {
-      isMounted = false; // Evita atualização do estado após desmontagem
+      isMounted = false;
     };
-  }, [token]);
-  
+  }, []);
 
   const handleCategorySelect = (category) => {
-    console.log("Categoria selecionada:", category);
-    setSelectedCategory(category);
+    setSelectedCategory(category === "TODOS" ? null : category);
   };
 
   const filteredRepositories = selectedCategory
-    ? repositories.filter((product) => {
-        console.log(
-          "Verificando produto:",
-          product.category,
-          "com categoria selecionada:",
-          selectedCategory
-        );
-        return product.category === selectedCategory;
-      })
+    ? repositories.filter((product) => product.category === selectedCategory)
     : repositories;
 
   return (
@@ -92,12 +79,15 @@ const EstoquePage = () => {
           {/* <BtnAddCombo /> */}
         </div>
         <div className={styles.container}>
-          {loading ? (
-            <p>Carregando produtos...</p>
+          {!initialLoadComplete ? (
+            <div className={styles.loadingContainer}>
+              <p>Carregando produtos...</p>
+              {/* Adicione um spinner aqui se desejar */}
+            </div>
           ) : filteredRepositories.length === 0 ? (
-            <p>Nenhum produto encontrado.</p>
+            <p className={styles.noProducts}>Nenhum produto encontrado.</p>
           ) : (
-            <div className={styles.container}>
+            <div className={styles.productsGrid}>
               {filteredRepositories.map((repo) => (
                 <CardEstoque
                   key={`${repo.productId}-${repo.name}`}
@@ -116,20 +106,22 @@ const EstoquePage = () => {
             </div>
           )}
         </div>
-        <CardShopList
-          cartItems={repositories.filter(
-            (product) => product.quantity < product.warningQuantity
-          )}
-          onCreateOrder={null}
-          total={repositories
-            .filter((product) => product.quantity < product.warningQuantity)
-            .reduce(
-              (acc, product) => acc + product.price * product.quantity,
-              0
-            )} // Calcula o total dos produtos com status vermelho
-          onPaymentMethodChange={null}
-          onCashGivenChange={null}
-        />
+        {initialLoadComplete && (
+          <CardShopList
+            cartItems={repositories.filter(
+              (product) => product.quantity < product.warningQuantity
+            )}
+            onCreateOrder={null}
+            total={repositories
+              .filter((product) => product.quantity < product.warningQuantity)
+              .reduce(
+                (acc, product) => acc + product.price * product.quantity,
+                0
+              )}
+            onPaymentMethodChange={null}
+            onCashGivenChange={null}
+          />
+        )}
       </div>
     </div>
   );
