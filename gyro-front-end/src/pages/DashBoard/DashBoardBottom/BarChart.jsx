@@ -11,7 +11,7 @@ const BarChart = () => {
     const [data, setData] = useState([
         { day: 'Segunda', value: 0 },
         { day: 'Terça', value: 0 },
-        { day: 'Quarta', value: 20 },
+        { day: 'Quarta', value: 25 },
         { day: 'Quinta', value: 0 },
         { day: 'Sexta', value: 0 },
         { day: 'Sábado', value: 0 },
