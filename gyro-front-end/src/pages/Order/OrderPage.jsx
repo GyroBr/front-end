@@ -16,15 +16,13 @@ const OrderPage = () => {
   const token = sessionStorage.getItem("token");
   const [paymentMethod, setPaymentMethod] = useState("");
   const [cashGiven, setCashGiven] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false); // Novo estado para controlar o envio
 
   const handlePaymentMethodChange = (method) => setPaymentMethod(method);
   const handleCashGivenChange = (amount) => setCashGiven(amount);
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const fetchedProducts = await getProducts(token);
-      console.log("Produtos recebidos:", fetchedProducts);
-
       try {
         const fetchedProducts = await getProducts(token);
         setProducts(fetchedProducts);
@@ -68,6 +66,10 @@ const OrderPage = () => {
     );
 
   const handleCreateOrder = async () => {
+    if (isSubmitting) return; // Evita múltiplos cliques
+    
+    setIsSubmitting(true); // Desabilita o botão
+    
     const orderData = {
       paymentMethod: paymentMethod,
       amountOfMoneyGiven: paymentMethod === "CASH" ? cashGiven : null,
@@ -79,16 +81,19 @@ const OrderPage = () => {
 
     try {
       const response = await createOrder(token, orderData);
-      setCartItems({});
+      
       if (response.status === 200) {
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
         toast.success("Pedido criado com sucesso!", {
           autoClose: 700,
         });
+        
+        setTimeout(() => {
+          setCartItems({});
+          window.location.reload();
+        }, 1000);
       }
     } catch (error) {
+      setIsSubmitting(false); // Reabilita o botão em caso de erro
       const errorMessage = error.response?.data || error.message;
       toast.error(`Erro ao tentar criar o pedido: ${errorMessage}`, {
         autoClose: 1500,
@@ -135,6 +140,7 @@ const OrderPage = () => {
             total={calculateTotal()}
             onPaymentMethodChange={handlePaymentMethodChange}
             onCashGivenChange={handleCashGivenChange}
+            isSubmitting={isSubmitting} // Passa a prop para o CardCart
           />
         </div>
       </div>

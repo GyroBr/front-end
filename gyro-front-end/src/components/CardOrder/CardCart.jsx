@@ -1,18 +1,24 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import styles from "./CardCart.module.css";
 
-const CardCart = ({ cartItems, onCreateOrder, total, onPaymentMethodChange, onCashGivenChange }) => {
+const CardCart = ({
+  cartItems,
+  onCreateOrder,
+  total,
+  onPaymentMethodChange,
+  onCashGivenChange,
+  isSubmitting // Nova prop recebida
+}) => {
   const [paymentMethod, setPaymentMethod] = useState("");
   const [cashGiven, setCashGiven] = useState("");
 
   const handlePaymentMethodChange = (e) => {
     const value = e.target.value;
     setPaymentMethod(value);
-    onPaymentMethodChange(value); // Comunica com o componente pai
+    onPaymentMethodChange(value);
     if (value !== "CASH") {
       setCashGiven("");
-      onCashGivenChange(0); // Reseta o valor caso não seja dinheiro
+      onCashGivenChange(0);
     }
   };
 
@@ -20,7 +26,7 @@ const CardCart = ({ cartItems, onCreateOrder, total, onPaymentMethodChange, onCa
     const value = parseFloat(e.target.value);
     const sanitizedValue = isNaN(value) ? "" : value;
     setCashGiven(sanitizedValue);
-    onCashGivenChange(sanitizedValue); // Comunica com o componente pai
+    onCashGivenChange(sanitizedValue);
   };
 
   const calculateChange = () => {
@@ -29,6 +35,12 @@ const CardCart = ({ cartItems, onCreateOrder, total, onPaymentMethodChange, onCa
   };
 
   const change = calculateChange();
+
+  // Verifica se o botão deve estar desabilitado
+  const isButtonDisabled = 
+    isSubmitting || 
+    Object.keys(cartItems).length === 0 || 
+    paymentMethod === "";
 
   return (
     <div className={styles.box_order}>
@@ -61,6 +73,7 @@ const CardCart = ({ cartItems, onCreateOrder, total, onPaymentMethodChange, onCa
                 name="selectMethodOfPayment"
                 value={paymentMethod}
                 onChange={handlePaymentMethodChange}
+                disabled={isSubmitting} // Desabilita durante o envio
               >
                 <option value="">Selecione</option>
                 <option value="CREDIT_CARD">Cartão de Crédito</option>
@@ -79,6 +92,7 @@ const CardCart = ({ cartItems, onCreateOrder, total, onPaymentMethodChange, onCa
                     value={cashGiven}
                     onChange={handleCashGivenChange}
                     placeholder="Insira o valor"
+                    disabled={isSubmitting} // Desabilita durante o envio
                   />
                 </label>
                 <span className={styles.change_label}>
@@ -98,8 +112,19 @@ const CardCart = ({ cartItems, onCreateOrder, total, onPaymentMethodChange, onCa
             currency: 'BRL'
           })}
         </span>
-        <button className={styles.btn_finalize} onClick={onCreateOrder}>
-          Finalizar Pedido
+        <button 
+          className={`${styles.btn_finalize} ${isSubmitting ? styles.btn_loading : ''}`}
+          onClick={onCreateOrder}
+          disabled={isButtonDisabled}
+        >
+          {isSubmitting ? (
+            <>
+              <span className={styles.spinner}></span>
+              Processando...
+            </>
+          ) : (
+            'Finalizar Pedido'
+          )}
         </button>
       </div>
     </div>
