@@ -140,10 +140,8 @@ const HomeComponent = () => {
             <div className={styles.card}>
               <img className={styles.icons} src={valueIcon} alt="Value" />
               <h1>Valores</h1>
-              <p>
-                Nossos valores são os princípios que orientam nossas decisões,
-                relações e cultura: Inovação; Comprometimento; Excelência; Transparência; Colaboração
-              </p>
+              <p>Nossos valores são os princípios que orientam nossas decisões,
+                relações e cultura: <br />Inovação, Comprometimento, Excelência, Transparência e Colaboração.</p>
             </div>
           </div>
         </div>
